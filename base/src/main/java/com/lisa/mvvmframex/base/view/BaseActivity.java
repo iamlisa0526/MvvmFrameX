@@ -1,4 +1,4 @@
-package com.lisa.mvvmframex.base.view.mvc;
+package com.lisa.mvvmframex.base.view;
 
 import android.content.Context;
 import android.os.Bundle;
