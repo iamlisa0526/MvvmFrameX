@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--自定义控件Header-->
+    <declare-styleable name="Header">
+        <attr name="bl_title" format="string|reference" />
+        <attr name="bl_rightTitle" format="string|reference" />
+        <attr name="bl_rightIcon" format="reference" />
+        <attr name="bl_titleRightIcon" format="reference" />
+        <attr name="back_visible" format="boolean" />
+    </declare-styleable>
+
+</resources>
