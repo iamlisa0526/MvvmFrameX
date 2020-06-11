@@ -1,0 +1,3 @@
+rootProject.name='MvvmFrameX'
+include ':app'
+include ':base'
