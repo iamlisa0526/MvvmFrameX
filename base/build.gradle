@@ -16,7 +16,7 @@ uploadArchives {
         // 项目名称
         pom.artifactId = "base"
         // 版本号
-        pom.version = "1.0.1"
+        pom.version = "1.0"
     }
 }
 //------------------------------aar包上传私服配置end--------------------------
@@ -88,5 +88,8 @@ dependencies {
 
     //基于zxing优化版的二维码库（提升二维码扫描速度）
     api 'com.github.yuzhiqiang1993:zxing:2.2.8'
+
+    //图片加载框架picasso
+    api 'com.squareup.picasso:picasso:2.5.2'
 }
 
