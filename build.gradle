@@ -30,9 +30,9 @@ task clean(type: Delete) {
 
 //定义编译常量
 ext {
-    compileSdkVersion = 28 //Android9.0建议compileSdkVersion=targetSdkVersion并且是最新的sdk
+    compileSdkVersion = 29 //Android9.0建议compileSdkVersion=targetSdkVersion并且是最新的sdk
     minSdkVersion = 21 //Android5.0
-    targetSdkVersion = 28
+    targetSdkVersion = 29
     versionCode = 1
     versionName = "1.0.0"
 }

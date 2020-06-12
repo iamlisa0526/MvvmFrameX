@@ -15,7 +15,7 @@ import java.util.*
  * @CreateDate: 2020/6/8 09:10
  */
 abstract class BaseTabActivity : BaseActivity() {
-    private var fragments: List<Fragment> = ArrayList()
+    private var fragments = ArrayList<Fragment>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +24,14 @@ abstract class BaseTabActivity : BaseActivity() {
     }
 
     private fun initTab() {
-        vp_fragment.adapter = BaseTabAdapter(supportFragmentManager, titles, getFragments(fragments))
+        vp_fragment.adapter =
+            BaseTabAdapter(supportFragmentManager, getTitles(), getFragments(fragments))
         tab_layout.tabMode = TabLayout.MODE_FIXED
         tab_layout.setupWithViewPager(vp_fragment)
         TabLayoutUtils.setIndicator(tab_layout, 25, 25) //设置tab中item的margin
     }
 
-    abstract val titles: Array<String>
+    abstract fun getTitles(): Array<String>
 
-    abstract fun getFragments(fragments: List<Fragment>?): List<Fragment?>?
+    abstract fun getFragments(fragments: ArrayList<Fragment>): ArrayList<Fragment>
 }
