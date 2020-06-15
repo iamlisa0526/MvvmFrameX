@@ -20,12 +20,11 @@ abstract class BaseListActivity<T> : BaseActivity() {
     private lateinit var mAdapter: RecyclerView.Adapter<*>
     private lateinit var mLoadService: LoadService<Any>
 
+    override fun getLayout(): Int {
+        return R.layout.activity_base_list
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_base_list)
-
+    override fun init() {
         header.visibility = View.VISIBLE
 
         mAdapter = getAdapter()

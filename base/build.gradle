@@ -16,9 +16,10 @@ uploadArchives {
         // 项目名称
         pom.artifactId = "base"
         // 版本号
-        pom.version = "1.1"
+        pom.version = "1.2.3"
     }
 }
+
 //------------------------------aar包上传私服配置end--------------------------
 //---------------------------------------------------------------------------
 
@@ -80,16 +81,22 @@ dependencies {
     //用LiveData构建的数据通信总线（优于EventBus）
     api 'com.jeremyliao:live-event-bus:1.6.1'
 
-    //仿IOS选择省市区的三级联动弹框View
-    api 'com.contrarywind:Android-PickerView:4.1.9'
-
     //常用工具库(2.4.0及以上版本需要迁移到androidx)
     api 'com.github.tamsiree.RxTool:RxKit:2.6.2'
 
-    //基于zxing优化版的二维码库（提升二维码扫描速度）
-    api 'com.github.yuzhiqiang1993:zxing:2.2.8'
-
     //图片加载框架picasso
     api 'com.squareup.picasso:picasso:2.5.2'
+
+    //底部导航栏，也支持垂直方向
+    api 'me.majiajie:pager-bottom-tab-strip:2.3.0X'
+
+//--------------------------------以上为构建一个新应用的所必须的三方库----------------------------------------
+//--------------------------------以下为可选三方库，在需要的module中集成即可----------------------------------------
+
+//    //仿IOS选择省市区的三级联动弹框View
+//    api 'com.contrarywind:Android-PickerView:4.1.9'
+//
+//    //基于zxing优化版的二维码库（提升二维码扫描速度）
+//    api 'com.github.yuzhiqiang1993:zxing:2.2.8'
 }
 

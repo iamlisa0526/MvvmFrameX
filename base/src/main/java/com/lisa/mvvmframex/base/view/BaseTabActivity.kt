@@ -15,7 +15,20 @@ import java.util.*
  * @CreateDate: 2020/6/8 09:10
  */
 abstract class BaseTabActivity : BaseActivity() {
+
     private var fragments = ArrayList<Fragment>()
+
+    override fun getLayout(): Int {
+        return R.layout.activity_base_tab
+    }
+
+    override fun init() {
+        vp_fragment.adapter =
+            BaseTabAdapter(supportFragmentManager, getTitles(), getFragments(fragments))
+        tab_layout.tabMode = TabLayout.MODE_FIXED
+        tab_layout.setupWithViewPager(vp_fragment)
+        TabLayoutUtils.setIndicator(tab_layout, 25, 25) //设置tab中item的margin
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -12,7 +12,7 @@ import com.zhouyou.http.model.HttpHeaders;
  * @Author: lisa
  * @CreateDate: 2020/4/12 09:37
  */
-public class BaseApplication extends Application {
+public abstract class BaseApplication extends Application {
     //OOM won't happen
     public static Application application;
 
@@ -27,17 +27,6 @@ public class BaseApplication extends Application {
         debug = isDebug;
     }
 
-    private String baseUrl;
-
-    /**
-     * 继承该类的子类在onCreate调用该方法即可，传参应该是Application的debug开关
-     *
-     * @param baseUrl
-     */
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -46,14 +35,22 @@ public class BaseApplication extends Application {
 
         configLoadSir();
 
-        configRxEasyHttp();
-
+        configRxEasyHttp(getMyBaseUrl());
     }
 
     /**
-     * 配置RxEasyHttp
+     * 获取全局URL
+     *
+     * @return
      */
-    private void configRxEasyHttp() {
+    protected abstract String getMyBaseUrl();
+
+    /**
+     * 配置RxEasyHttp
+     *
+     * @param baseUrl 全局URL,url只能是域名或者域名+端口号
+     */
+    private void configRxEasyHttp(String baseUrl) {
         EasyHttp.init(this);//默认初始化
 
         //全局设置请求头
