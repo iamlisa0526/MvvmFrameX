@@ -1,4 +1,6 @@
-apply plugin: 'com.android.application'
+ext.mainApp = true //标记为主app module
+apply plugin: 'cc-register'
+//--------------------------以上是插件化框架CC的配置-----------------------------
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 

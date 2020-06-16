@@ -1,7 +1,6 @@
 package com.lisa.mvvmframex.base.view
 
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.lisa.mvvmframex.base.R
@@ -11,11 +10,11 @@ import kotlinx.android.synthetic.main.activity_base_tab.*
 import java.util.*
 
 /**
- * @Description: BaseTabActivity
+ * @Description: BaseTabAdapter
  * @Author: lisa
  * @CreateDate: 2020/6/8 09:10
  */
-abstract class BaseTabActivity : BaseActivity() {
+abstract class BaseTabFragment : BaseFragment() {
 
     private var fragments = ArrayList<Fragment>()
 
@@ -24,10 +23,10 @@ abstract class BaseTabActivity : BaseActivity() {
     }
 
     override fun init() {
-        header.visibility = View.VISIBLE
+        fragments.clear()
 
         vp_fragment.adapter =
-            BaseTabAdapter(supportFragmentManager, getTitles(), getFragments(fragments))
+            BaseTabAdapter(childFragmentManager, getTitles(), getFragments(fragments))
         tab_layout.tabMode = TabLayout.MODE_FIXED
         tab_layout.setupWithViewPager(vp_fragment)
         TabLayoutUtils.setIndicator(tab_layout, 25, 25) //设置tab中item的margin

@@ -9,7 +9,8 @@
     <com.lisa.mvvmframex.base.customview.Header
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <!--页面Hearder-->
     <FrameLayout

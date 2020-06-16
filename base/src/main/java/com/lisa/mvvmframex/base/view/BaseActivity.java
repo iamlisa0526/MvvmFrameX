@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
 /**
- * @Description: MVC-Activity基类
+ * @Description: Activity基类
  * @Author: lisa
  * @CreateDate: 2020/5/27 09:26
  */

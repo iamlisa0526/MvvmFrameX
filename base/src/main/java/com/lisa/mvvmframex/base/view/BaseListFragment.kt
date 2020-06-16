@@ -1,13 +1,8 @@
 package com.lisa.mvvmframex.base.view
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kingja.loadsir.core.LoadService
-import com.kingja.loadsir.core.LoadSir
 import com.lisa.mvvmframex.base.R
 import com.lisa.mvvmframex.base.loadsir.EmptyCallback
 import kotlinx.android.synthetic.main.activity_base_list.*
@@ -21,6 +16,8 @@ abstract class BaseListFragment<T> : BaseFragment() {
     protected val mList = arrayListOf<T>()
     private lateinit var mAdapter: RecyclerView.Adapter<*>
     private lateinit var mLoadService: LoadService<Any>
+
+//todo LoadSir配置
 
 //    override fun onCreateView(
 //        inflater: LayoutInflater,

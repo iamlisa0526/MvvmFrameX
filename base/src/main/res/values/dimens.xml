@@ -1,0 +1,6 @@
+<resources>
+
+    <!--分割线高度-->
+    <dimen name="divider_line">0.5dp</dimen>
+
+</resources>

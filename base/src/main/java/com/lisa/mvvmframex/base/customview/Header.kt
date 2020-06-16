@@ -13,7 +13,11 @@ import kotlinx.android.synthetic.main.layout_header.view.*
  * Created by admin on 2018/9/12.
  */
 
-class Header @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = -1) : FrameLayout(context, attrs, defStyleAttr) {
+class Header @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1
+) : FrameLayout(context, attrs, defStyleAttr) {
     private var title: String? = ""
     private var titleRight: String? = ""
     private var titleResId = -1
@@ -39,12 +43,21 @@ class Header @JvmOverloads constructor(context: Context, attrs: AttributeSet? = 
 
         tv_title.text = title
         if (titleResId != -1) tv_title.text = context.resources.getString(titleResId)
-        if (titleRightIconResId != -1) tv_title.setCompoundDrawablesWithIntrinsicBounds(0, 0, titleRightIconResId, 0)
+        if (titleRightIconResId != -1) tv_title.setCompoundDrawablesWithIntrinsicBounds(
+            0,
+            0,
+            titleRightIconResId,
+            0
+        )
 
         tv_right.text = titleRight
         if (titleRightResId != -1) tv_right.text = context.resources.getString(titleRightResId)
 
-        if (iconRightResId != -1) iv_right.setImageDrawable(context.resources.getDrawable(iconRightResId))
+        if (iconRightResId != -1) iv_right.setImageDrawable(
+            context.resources.getDrawable(
+                iconRightResId
+            )
+        )
 
         tv_title.setOnClickListener { titleListener?.onClick(it) }
         tv_right.setOnClickListener { rightTitleListener?.onClick(it) }
@@ -106,7 +119,11 @@ class Header @JvmOverloads constructor(context: Context, attrs: AttributeSet? = 
      * 设置右图标IdRes
      */
     fun setRightIcon(iconIdRes: Int) {
-        iv_right.setImageDrawable(if (iconIdRes == -1) null else context.resources.getDrawable(iconIdRes))
+        iv_right.setImageDrawable(
+            if (iconIdRes == -1) null else context.resources.getDrawable(
+                iconIdRes
+            )
+        )
     }
 
     /**
@@ -116,5 +133,12 @@ class Header @JvmOverloads constructor(context: Context, attrs: AttributeSet? = 
         if (iconIdRes != -1) tv_title.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconIdRes, 0)
     }
 
+    /**
+     * 设置返回按钮是否可见
+     */
+    fun setIvBackVisible(visible: Boolean) {
+        iv_back.visibility = if (visible) View.VISIBLE else View.GONE
+
+    }
 }
 
