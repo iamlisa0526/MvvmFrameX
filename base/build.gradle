@@ -16,7 +16,7 @@ uploadArchives {
         // 项目名称
         pom.artifactId = "base"
         // 版本号
-        pom.version = "1.2.17"
+        pom.version = "1.2.19"
     }
 }
 
@@ -75,8 +75,12 @@ dependencies {
     api 'com.yanzhenjie:permission:2.0.3'
 
     //智能加载刷新框架
-    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
-    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'  //没有使用特殊Header，可以不加这行
+    api  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+    api  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+    api  'com.scwang.smart:refresh-footer-classics:2.0.1'    //经典加载
+
+    //页面多状态布局(content,loading,empty,error)
+    api 'com.github.czy1121:loadinglayout:1.0.1'
 
     //用LiveData构建的数据通信总线（优于EventBus）
     api 'com.jeremyliao:live-event-bus:1.6.1'

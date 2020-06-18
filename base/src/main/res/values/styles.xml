@@ -1,0 +1,9 @@
+<resources>
+
+    <!--全局配置空数据、请求错误等状态页面-->
+    <style name="LoadingLayoutStyle" parent="LoadingLayout.Style">
+        <item name="llEmptyImage">@drawable/empty</item>
+        <item name="llEmptyText">@string/no_data</item>
+        <item name="llErrorImage">@drawable/error</item>
+    </style>
+</resources>

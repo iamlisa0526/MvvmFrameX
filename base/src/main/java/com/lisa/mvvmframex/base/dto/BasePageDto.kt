@@ -14,6 +14,6 @@ class BasePageDto<T> {
     /**
      * 数据集合
      */
-    var content: ArrayList<T> = arrayListOf()
+    var content = arrayListOf<T>()
 
 }

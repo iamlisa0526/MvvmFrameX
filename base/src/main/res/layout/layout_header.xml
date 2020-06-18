@@ -42,7 +42,6 @@
         android:drawablePadding="5dp"
         android:textColor="@color/white"
         android:textSize="18sp"
-        tools:drawableRight="@mipmap/arrow_down"
         tools:text="标题" />
 </RelativeLayout>
 
