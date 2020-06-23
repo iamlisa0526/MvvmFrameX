@@ -1,6 +1,7 @@
 package com.lisa.mvvmframex.base.view
 
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lisa.mvvmframex.base.R
@@ -40,6 +41,7 @@ abstract class BaseListActivity<T> : BaseActivity() {
     }
 
     override fun init() {
+        header.visibility = View.VISIBLE
 
         initRecyclerView()
 
@@ -109,6 +111,7 @@ abstract class BaseListActivity<T> : BaseActivity() {
                         updatePageData()
                     } else {//不分页
                         unPageDto = getUnPageDto(result)
+                        mList.clear()
                         mList.addAll(unPageDto)
                         mAdapter.notifyDataSetChanged()
                     }
@@ -132,6 +135,9 @@ abstract class BaseListActivity<T> : BaseActivity() {
                             mLoadingLayout.setErrorText(e?.message)
                             mLoadingLayout.showError()
                         }
+                    } else {
+                        mLoadingLayout.setErrorText(e?.message)
+                        mLoadingLayout.showError()
                     }
                 }
             })

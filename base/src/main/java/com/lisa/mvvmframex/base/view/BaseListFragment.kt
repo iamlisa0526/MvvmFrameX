@@ -109,6 +109,7 @@ abstract class BaseListFragment<T> : BaseFragment() {
                         updatePageData()
                     } else {//不分页
                         unPageDto = getUnPageDto(result)
+                        mList.clear()
                         mList.addAll(unPageDto)
                         mAdapter.notifyDataSetChanged()
                     }
@@ -132,6 +133,9 @@ abstract class BaseListFragment<T> : BaseFragment() {
                             mLoadingLayout.setErrorText(e?.message)
                             mLoadingLayout.showError()
                         }
+                    } else {
+                        mLoadingLayout.setErrorText(e?.message)
+                        mLoadingLayout.showError()
                     }
                 }
             })
