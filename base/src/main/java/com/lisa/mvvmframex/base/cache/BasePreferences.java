@@ -1,11 +1,11 @@
 package com.lisa.mvvmframex.base.cache;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
+import com.lisa.mvvmframex.base.BaseApplication;
 import com.lisa.mvvmframex.base.utils.EditorUtil;
 
 import java.util.Map;
@@ -16,14 +16,13 @@ import java.util.Map;
  * @CreateDate: 2020/5/6 15:54
  */
 public abstract class BasePreferences {
-    protected static Application mApplication;
     protected SharedPreferences mPreferences;
 
     public BasePreferences() {
         if (TextUtils.isEmpty(getSPFileName())) {
-            mPreferences = PreferenceManager.getDefaultSharedPreferences(mApplication);
+            mPreferences = PreferenceManager.getDefaultSharedPreferences(BaseApplication.Companion.getApplication());
         } else {
-            mPreferences = mApplication.getSharedPreferences(getSPFileName(), Context.MODE_PRIVATE);
+            mPreferences = BaseApplication.Companion.getApplication().getSharedPreferences(getSPFileName(), Context.MODE_PRIVATE);
         }
     }
 
