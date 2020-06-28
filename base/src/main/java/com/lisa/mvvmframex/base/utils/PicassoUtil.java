@@ -1,6 +1,7 @@
 package com.lisa.mvvmframex.base.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
@@ -22,10 +23,12 @@ public class PicassoUtil {
      * @param palceholder
      */
     public static void setImage(Context context, String url, ImageView iv, @DrawableRes int palceholder) {
-        Picasso.with(context)
-                .load(url)
-                .placeholder(palceholder)
-                .into(iv);
+        if (!TextUtils.isEmpty(url)) {
+            Picasso.with(context)
+                    .load(url)
+                    .placeholder(palceholder)
+                    .into(iv);
+        }
     }
 
 }

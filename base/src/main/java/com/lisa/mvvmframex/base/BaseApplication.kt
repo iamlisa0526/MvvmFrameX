@@ -51,10 +51,7 @@ abstract class BaseApplication : Application() {
 
         //全局设置请求头
         val headers = HttpHeaders()
-        headers.put(
-            "Accept-Encoding",
-            "identity"
-        ) //解决获取contentLength = urlConn.getContentLength()失败的问题
+        headers.put("Accept-Encoding", "identity") //解决获取contentLength = urlConn.getContentLength()失败的问题
         EasyHttp.getInstance()
             .setBaseUrl(getMyBaseUrl()) //设置全局URL,url只能是域名或者域名+端口号
             .debug("EasyHttp", true) // 打开该调试开关,最后的true表示是否打印内部异常，一般打开方便调试错误
