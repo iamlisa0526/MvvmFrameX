@@ -14,7 +14,7 @@ import ezy.ui.layout.LoadingLayout
 import kotlinx.android.synthetic.main.activity_base_list.*
 
 /**
- * @Description:    列表Fragment基类
+ * @Description:    列表Activity基类
  * @Author:         lisa
  * @CreateDate:     2020/6/12 10:11
  */
@@ -50,8 +50,8 @@ abstract class BaseListActivity<T> : BaseActivity() {
         if (isRefresh()) {//分页
             configRefresh()
         } else {//不分页
-            refresh_layout.setEnableRefresh(false)
-            refresh_layout.setEnableLoadMore(false)
+            refresh_layout?.setEnableRefresh(false)
+            refresh_layout?.setEnableLoadMore(false)
             request()
         }
 
@@ -81,17 +81,17 @@ abstract class BaseListActivity<T> : BaseActivity() {
      * 设置刷新加载相关配置
      */
     private fun configRefresh() {
-        refresh_layout.setEnableRefresh(true)//默认是true
-        refresh_layout.autoRefresh()
+        refresh_layout?.setEnableRefresh(true)//默认是true
+        refresh_layout?.autoRefresh()
 
         //刷新监听
-        refresh_layout.setOnRefreshListener {
+        refresh_layout?.setOnRefreshListener {
             pageNo = 1
             request()
         }
 
         //加载更多监听
-        refresh_layout.setOnLoadMoreListener {
+        refresh_layout?.setOnLoadMoreListener {
             pageNo++
             request()
         }
@@ -129,9 +129,9 @@ abstract class BaseListActivity<T> : BaseActivity() {
                     if (isRefresh()) {
                         if (pageNo > 1) {//加载
                             pageNo--
-                            refresh_layout.finishLoadMore(false)//加载失败
+                            refresh_layout?.finishLoadMore(false)//加载失败
                         } else {//刷新
-                            refresh_layout.finishRefresh(false)//刷新失败
+                            refresh_layout?.finishRefresh(false)//刷新失败
                             mLoadingLayout.setErrorText(e?.message)
                             mLoadingLayout.showError()
                         }
@@ -158,18 +158,18 @@ abstract class BaseListActivity<T> : BaseActivity() {
         if (pageNo == 1) {//刷新
             if (mList.size < pageSize) {
                 //完成刷新并标记没有更多数据
-                refresh_layout.finishRefreshWithNoMoreData()
+                refresh_layout?.finishRefreshWithNoMoreData()
             } else {
                 //完成刷新并标记还有更多数据
-                refresh_layout.finishRefresh()
+                refresh_layout?.finishRefresh()
             }
         } else {//加载
             if (mList.size < basePageDto.totalElements) {
                 //完成加载并标记还有更多数据
-                refresh_layout.finishLoadMore()
+                refresh_layout?.finishLoadMore()
             } else {
                 //完成加载并标记没有更多数据
-                refresh_layout.finishLoadMoreWithNoMoreData()
+                refresh_layout?.finishLoadMoreWithNoMoreData()
             }
         }
 
