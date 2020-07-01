@@ -9,8 +9,10 @@ import com.lisa.mvvmframex.base.network.MyEasyHttp
 import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
+import com.zhouyou.http.request.GetRequest
 import ezy.ui.layout.LoadingLayout
 import kotlinx.android.synthetic.main.activity_base_list.*
+import org.jetbrains.anko.toast
 
 /**
  * @Description:    列表Fragment基类
@@ -96,10 +98,16 @@ abstract class BaseListFragment<T> : BaseFragment() {
     }
 
     /**
+     * 子类实现
+     * 如：MyEasyHttp.get("/register")
+     */
+    protected abstract fun getGetRequest(): GetRequest
+
+    /**
      * 请求网络数据
      */
-    private fun request() {
-        MyEasyHttp.get(getHttpUrl())
+    protected fun request() {
+        getGetRequest()
             .execute(object : SimpleCallBack<Any>() {
                 override fun onSuccess(any: Any) {
                     val result = GsonUtil.toJson(any)
@@ -123,23 +131,33 @@ abstract class BaseListFragment<T> : BaseFragment() {
 
                 }
 
-                override fun onError(e: ApiException?) {
+                override fun onError(e: ApiException) {
                     if (isRefresh()) {
                         if (pageNo > 1) {//加载
                             pageNo--
                             refresh_layout?.finishLoadMore(false)//加载失败
                         } else {//刷新
                             refresh_layout?.finishRefresh(false)//刷新失败
-                            mLoadingLayout.setErrorText(e?.message)
+                            mLoadingLayout.setErrorText(e.message)
                             mLoadingLayout.showError()
                         }
                     } else {
-                        mLoadingLayout.setErrorText(e?.message)
+                        mLoadingLayout.setErrorText(e.message)
                         mLoadingLayout.showError()
+                    }
+
+                    if (401 == e.code) {
+                        context?.toast("授权已过期，请重新登录")
+                        go2Login()
                     }
                 }
             })
     }
+
+    /**
+     * 跳转登录页
+     */
+    protected abstract fun go2Login()
 
     /**
      * 更新分页数据
@@ -172,8 +190,6 @@ abstract class BaseListFragment<T> : BaseFragment() {
         }
 
     }
-
-    abstract fun getHttpUrl(): String
 
     /**
      * 分页加载时复写该方法，复写时删除super.getBasePageDto(result)

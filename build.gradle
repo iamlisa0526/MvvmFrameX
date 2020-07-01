@@ -6,6 +6,8 @@ buildscript {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        //公司私服
+        maven { url 'http://nexus.maomiwh.com/repository/android_maven/' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0'
@@ -23,6 +25,8 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        //公司私服
+        maven { url 'http://nexus.maomiwh.com/repository/android_maven/' }
     }
 }
 
