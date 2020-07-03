@@ -2,6 +2,8 @@ package com.lisa.mvvmframex.base.view
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.os.Build
+import android.os.Build.VERSION_CODES.JELLY_BEAN
 import android.os.Message
 import android.view.KeyEvent
 import android.view.View
@@ -29,6 +31,14 @@ class BaseWebActivity : BaseActivity() {
         mWebSettings.useWideViewPort = true
         mWebSettings.defaultTextEncodingName = "utf-8"
         mWebSettings.loadsImagesAutomatically = true
+        //修复bug：Mixed Content: The page at 'https://xxx' was loaded over HTTPS, but requested an insecure image 'http://xxx.png'. This request has been blocked; the content must be served over HTTPS."
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mWebSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
+        }
+        //修复bug：3D全景介绍无声音
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
+            mWebSettings.mediaPlaybackRequiresUserGesture = false
+        }
 
         //调用JS方法.安卓版本大于17,加上注解 @JavascriptInterface
         mWebSettings.javaScriptEnabled = true
@@ -77,7 +87,10 @@ class BaseWebActivity : BaseActivity() {
             super.onGeolocationPermissionsHidePrompt()
         }
 
-        override fun onGeolocationPermissionsShowPrompt(origin: String, callback: GeolocationPermissions.Callback) {
+        override fun onGeolocationPermissionsShowPrompt(
+            origin: String,
+            callback: GeolocationPermissions.Callback
+        ) {
             callback.invoke(origin, true, false) //注意个函数，第二个参数就是是否同意定位权限，第三个是是否希望内核记住
             super.onGeolocationPermissionsShowPrompt(origin, callback)
         }
@@ -98,7 +111,12 @@ class BaseWebActivity : BaseActivity() {
         }
 
         //=========多窗口的问题start==========================================================
-        override fun onCreateWindow(view: WebView, isDialog: Boolean, isUserGesture: Boolean, resultMsg: Message): Boolean {
+        override fun onCreateWindow(
+            view: WebView,
+            isDialog: Boolean,
+            isUserGesture: Boolean,
+            resultMsg: Message
+        ): Boolean {
             val transport = resultMsg.obj as WebViewTransport
             transport.webView = view
             resultMsg.sendToTarget()
