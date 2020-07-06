@@ -12,48 +12,66 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
-    <!--页面Hearder-->
     <FrameLayout
-        android:id="@+id/fl_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/bottom_gray_line_bg_white"
-        app:tabIndicatorColor="@color/primary" />
+            <!--页面Hearder-->
+            <FrameLayout
+                android:id="@+id/fl_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <!--页面Middle-->
-    <FrameLayout
-        android:id="@+id/fl_middle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/bottom_gray_line_bg_white"
+                app:tabIndicatorColor="@color/primary" />
 
-    <TextView
-        android:id="@+id/tv_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/all_line_gray_bg_white_2radius"
-        android:drawableLeft="@mipmap/search_gray"
-        android:hint="搜索"
-        android:padding="10dp"
-        android:textSize="13sp"
-        android:visibility="gone"
-        tools:visibility="visible" />
+            <!--页面Middle-->
+            <FrameLayout
+                android:id="@+id/fl_middle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+            <!--搜索-->
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/all_line_gray_bg_white_2radius"
+                android:drawableLeft="@mipmap/search_gray"
+                android:hint="搜索"
+                android:padding="10dp"
+                android:textSize="13sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-    <!--页面Footer-->
-    <FrameLayout
-        android:id="@+id/fl_footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!--页面Footer-->
+            <FrameLayout
+                android:id="@+id/fl_footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--悬浮View-->
+        <FrameLayout
+            android:id="@+id/fl_float"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
 </LinearLayout>
