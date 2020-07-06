@@ -16,7 +16,7 @@ uploadArchives {
         // 项目名称
         pom.artifactId = "base"
         // 版本号
-        pom.version = "1.4"
+        pom.version = "1.6.3"
     }
 }
 
@@ -84,7 +84,7 @@ dependencies {
     api 'com.github.czy1121:loadinglayout:1.0.1'
 
     //用LiveData构建的数据通信总线（优于EventBus）
-    api 'com.jeremyliao:live-event-bus:1.6.1'
+    api 'com.jeremyliao:live-event-bus-x:1.7.2'
 
     //常用工具库(2.4.0及以上版本需要迁移到androidx)
     api 'com.github.tamsiree.RxTool:RxKit:2.6.2'

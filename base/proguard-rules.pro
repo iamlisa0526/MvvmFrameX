@@ -20,3 +20,17 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 #todo 添加各个库的混淆配置
+
+#RxEasyHttp开始
+-keep class com.zhouyou.http.model.** {*;}
+-keep class com.zhouyou.http.cache.model.** {*;}
+-keep class com.zhouyou.http.cache.stategy.**{*;}
+#RxEasyHttp结束
+
+#liveeventbus开始
+-dontwarn com.jeremyliao.liveeventbus.**
+-keep class com.jeremyliao.liveeventbus.** { *; }
+-keep class androidx.lifecycle.** { *; }
+-keep class androidx.arch.core.** { *; }
+#liveeventbus结束
+
