@@ -90,7 +90,7 @@ dependencies {
     api 'com.github.tamsiree.RxTool:RxKit:2.6.2'
 
     //图片加载框架picasso
-    api 'com.squareup.picasso:picasso:2.5.2'
+    api 'com.squareup.picasso:picasso:2.71828'
 
     //底部导航栏，也支持垂直方向
     api 'me.majiajie:pager-bottom-tab-strip:2.3.0X'
