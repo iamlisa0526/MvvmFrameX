@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.lisa.mvvmframex.base.pictureselector.FullyGridLayoutManager
 import com.lisa.mvvmframex.base.pictureselector.GridImageAdapter
 import com.lisa.mvvmframex.base.pictureselector.MediaManager
-import com.lisa.mvvmframex.base.pictureselector.MyResultCallback
+import com.lisa.mvvmframex.base.pictureselector.MultiResultCallback
 import com.luck.picture.lib.decoration.GridSpacingItemDecoration
 import com.luck.picture.lib.tools.ScreenUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +24,11 @@ class MainActivity : AppCompatActivity() {
             4, GridLayoutManager.VERTICAL, false
         )
         adapter = GridImageAdapter(this, GridImageAdapter.OnAddClickListener {
-            MediaManager.addActivityMultiImage(this, MyResultCallback(adapter))
+            MediaManager.addActivityMultiImage(this,
+                MultiResultCallback(
+                    adapter
+                )
+            )
         })
         recycler_view.adapter = adapter
         recycler_view.addItemDecoration(
@@ -36,7 +40,11 @@ class MainActivity : AppCompatActivity() {
         )
 
         iv_image.setOnClickListener {
-            MediaManager.addActivitySingleImage(this, MyResultCallback(iv_image))
+            MediaManager.addActivitySingleImage(this,
+                MultiResultCallback(
+                    iv_image
+                )
+            )
         }
     }
 }

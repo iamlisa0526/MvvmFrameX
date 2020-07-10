@@ -20,9 +20,9 @@ object MediaManager {
     @JvmStatic
     fun addFragmentMultiImage(
         context: Fragment,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        addFragmentMedia(context, 9, PictureMimeType.ofImage(), myResultCallback)
+        addFragmentMedia(context, 9, PictureMimeType.ofImage(), multiResultCallback)
 
     }
 
@@ -32,9 +32,9 @@ object MediaManager {
     @JvmStatic
     fun addFragmentSingleImage(
         context: Fragment,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        addFragmentMedia(context, 1, PictureMimeType.ofImage(), myResultCallback)
+        addFragmentMedia(context, 1, PictureMimeType.ofImage(), multiResultCallback)
     }
 
     /**
@@ -43,9 +43,9 @@ object MediaManager {
     @JvmStatic
     fun addFragmentMultiVideo(
         context: Fragment,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        addFragmentMedia(context, 9, PictureMimeType.ofVideo(), myResultCallback)
+        addFragmentMedia(context, 9, PictureMimeType.ofVideo(), multiResultCallback)
 
     }
 
@@ -55,9 +55,9 @@ object MediaManager {
     @JvmStatic
     fun addFragmentSingleVideo(
         context: Fragment,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        addFragmentMedia(context, 1, PictureMimeType.ofVideo(), myResultCallback)
+        addFragmentMedia(context, 1, PictureMimeType.ofVideo(), multiResultCallback)
     }
 
     /**
@@ -68,9 +68,9 @@ object MediaManager {
         context: Fragment,
         maxNum: Int,
         mimeType: Int,
-        myResultCallback: OnResultCallbackListener<LocalMedia>
+        onResultCallbackListener: OnResultCallbackListener<LocalMedia>
     ) {
-        setSelectConfig(PictureSelector.create(context), maxNum, mimeType, myResultCallback)
+        setSelectConfig(PictureSelector.create(context), maxNum, mimeType, onResultCallbackListener)
     }
 
     /**
@@ -79,9 +79,9 @@ object MediaManager {
     @JvmStatic
     fun addActivityMultiImage(
         context: Activity,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        addActivityImage(context, 9, PictureMimeType.ofImage(), myResultCallback)
+        addActivityImage(context, 9, PictureMimeType.ofImage(), multiResultCallback)
 
     }
 
@@ -91,9 +91,9 @@ object MediaManager {
     @JvmStatic
     fun addActivitySingleImage(
         context: Activity,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        addActivityImage(context, 1, PictureMimeType.ofImage(), myResultCallback)
+        addActivityImage(context, 1, PictureMimeType.ofImage(), multiResultCallback)
     }
 
     /**
@@ -102,9 +102,9 @@ object MediaManager {
     @JvmStatic
     fun addActivityMultiVideo(
         context: Activity,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        addActivityImage(context, 9, PictureMimeType.ofVideo(), myResultCallback)
+        addActivityImage(context, 9, PictureMimeType.ofVideo(), multiResultCallback)
 
     }
 
@@ -114,9 +114,9 @@ object MediaManager {
     @JvmStatic
     fun addActivitySingleVideo(
         context: Activity,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        addActivityImage(context, 1, PictureMimeType.ofVideo(), myResultCallback)
+        addActivityImage(context, 1, PictureMimeType.ofVideo(), multiResultCallback)
     }
 
     /**
@@ -127,9 +127,9 @@ object MediaManager {
         context: Activity,
         maxNum: Int,
         mimeType: Int,
-        myResultCallback: MyResultCallback
+        multiResultCallback: MultiResultCallback
     ) {
-        setSelectConfig(PictureSelector.create(context), maxNum, mimeType, myResultCallback)
+        setSelectConfig(PictureSelector.create(context), maxNum, mimeType, multiResultCallback)
     }
 
     /**
@@ -140,7 +140,7 @@ object MediaManager {
         selector: PictureSelector,
         maxNum: Int,
         mimeType: Int,
-        myResultCallback: OnResultCallbackListener<LocalMedia>
+        onResultCallbackListener: OnResultCallbackListener<LocalMedia>
     ) {
         selector.openGallery(mimeType) // 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
             .imageEngine(PicassoEngine.createPicassoEngine())// 外部传入图片加载引擎，必传项
@@ -160,8 +160,8 @@ object MediaManager {
             .imageSpanCount(4) // 每行显示个数
             .minimumCompressSize(100) // 小于100kb的图片不压缩
             .isMaxSelectEnabledMask(true)// 选择数到了最大阀值列表是否启用蒙层效果
-            .selectionData(if (maxNum > 1) (myResultCallback as MyResultCallback).adapter.data else null)// 是否传入已选图片
-            .forResult(myResultCallback)
+            .selectionData(if (maxNum > 1) (onResultCallbackListener as MultiResultCallback).adapter.data else null)// 是否传入已选图片
+            .forResult(onResultCallbackListener)
     }
 
 }

@@ -11,20 +11,23 @@ import com.luck.picture.lib.listener.OnResultCallbackListener;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class MyResultCallback implements OnResultCallbackListener<LocalMedia> {
-    private final static String TAG = MyResultCallback.class.getSimpleName();
+/**
+ * 多选回调
+ */
+public class MultiResultCallback implements OnResultCallbackListener<LocalMedia> {
+    private final static String TAG = MultiResultCallback.class.getSimpleName();
 
     private WeakReference<GridImageAdapter> mAdapterWeakReference;
 
     private View mView;
 
     //单选（图片、视频、音频）
-    public MyResultCallback(View view) {
+    public MultiResultCallback(View view) {
         super();
         this.mView = view;
     }
 
-    public MyResultCallback(GridImageAdapter adapter) {
+    public MultiResultCallback(GridImageAdapter adapter) {
         super();
         this.mAdapterWeakReference = new WeakReference<>(adapter);
     }
