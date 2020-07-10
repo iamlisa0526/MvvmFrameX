@@ -18,7 +18,7 @@ object GlideUtil {
      * 设置Fragment图片
      *
      * @param context
-     * @param path
+     * @param path Any类型可以适配Uri
      * @param iv
      * @param placeholder
      */
