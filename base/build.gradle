@@ -16,7 +16,7 @@ uploadArchives {
         // 项目名称
         pom.artifactId = "base"
         // 版本号
-        pom.version = "1.7.0"
+        pom.version = "1.7.1"
     }
 }
 
@@ -89,8 +89,9 @@ dependencies {
     //常用工具库(2.4.0及以上版本需要迁移到androidx)
     api 'com.github.tamsiree.RxTool:RxKit:2.6.2'
 
-    //图片加载框架picasso
-    api 'com.squareup.picasso:picasso:2.71828'
+    //图片加载库glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     //底部导航栏，也支持垂直方向
     api 'me.majiajie:pager-bottom-tab-strip:2.3.0X'

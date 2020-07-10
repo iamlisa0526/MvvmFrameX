@@ -4,31 +4,32 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.ImageViewTarget;
 import com.lisa.mvvmframex.base.R;
-import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.engine.ImageEngine;
 import com.luck.picture.lib.listener.OnImageCompleteCallback;
 import com.luck.picture.lib.tools.MediaUtils;
 import com.luck.picture.lib.widget.longimage.ImageSource;
 import com.luck.picture.lib.widget.longimage.ImageViewState;
 import com.luck.picture.lib.widget.longimage.SubsamplingScaleImageView;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import java.io.File;
 
 /**
  * @author：luck
- * @date：2020/4/30 10:54 AM
- * @describe：Picasso加载引擎
+ * @date：2019-11-13 17:02
+ * @describe：Glide加载引擎
  */
-public class PicassoEngine implements ImageEngine {
+public class GlideEngine implements ImageEngine {
 
     /**
      * 加载图片
@@ -39,24 +40,9 @@ public class PicassoEngine implements ImageEngine {
      */
     @Override
     public void loadImage(@NonNull Context context, @NonNull String url, @NonNull ImageView imageView) {
-        VideoRequestHandler videoRequestHandler = new VideoRequestHandler();
-        if (PictureMimeType.isContent(url)) {
-            Picasso.get()
-                    .load(Uri.parse(url))
-                    .into(imageView);
-        } else {
-            if (PictureMimeType.isUrlHasVideo(url)) {
-                Picasso picasso = new Picasso.Builder(context.getApplicationContext())
-                        .addRequestHandler(videoRequestHandler)
-                        .build();
-                picasso.load(videoRequestHandler.SCHEME_VIDEO + ":" + url)
-                        .into(imageView);
-            } else {
-                Picasso.get()
-                        .load(new File(url))
-                        .into(imageView);
-            }
-        }
+        Glide.with(context)
+                .load(url)
+                .into(imageView);
     }
 
     /**
@@ -73,11 +59,28 @@ public class PicassoEngine implements ImageEngine {
     public void loadImage(@NonNull Context context, @NonNull String url,
                           @NonNull ImageView imageView,
                           SubsamplingScaleImageView longImageView, OnImageCompleteCallback callback) {
-        Picasso.get()
-                .load(PictureMimeType.isContent(url) ? Uri.parse(url) : Uri.fromFile(new File(url)))
-                .into(new Target() {
+        Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .into(new ImageViewTarget<Bitmap>(imageView) {
                     @Override
-                    public void onBitmapLoaded(Bitmap resource, Picasso.LoadedFrom from) {
+                    public void onLoadStarted(@Nullable Drawable placeholder) {
+                        super.onLoadStarted(placeholder);
+                        if (callback != null) {
+                            callback.onShowLoading();
+                        }
+                    }
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                        super.onLoadFailed(errorDrawable);
+                        if (callback != null) {
+                            callback.onHideLoading();
+                        }
+                    }
+
+                    @Override
+                    protected void setResource(@Nullable Bitmap resource) {
                         if (callback != null) {
                             callback.onHideLoading();
                         }
@@ -100,20 +103,6 @@ public class PicassoEngine implements ImageEngine {
                                 // 普通图片
                                 imageView.setImageBitmap(resource);
                             }
-                        }
-                    }
-
-                    @Override
-                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-                        if (callback != null) {
-                            callback.onHideLoading();
-                        }
-                    }
-
-                    @Override
-                    public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        if (callback != null) {
-                            callback.onShowLoading();
                         }
                     }
                 });
@@ -133,11 +122,12 @@ public class PicassoEngine implements ImageEngine {
     public void loadImage(@NonNull Context context, @NonNull String url,
                           @NonNull ImageView imageView,
                           SubsamplingScaleImageView longImageView) {
-        Picasso.get()
-                .load(PictureMimeType.isContent(url) ? Uri.parse(url) : Uri.fromFile(new File(url)))
-                .into(new Target() {
+        Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .into(new ImageViewTarget<Bitmap>(imageView) {
                     @Override
-                    public void onBitmapLoaded(Bitmap resource, Picasso.LoadedFrom from) {
+                    protected void setResource(@Nullable Bitmap resource) {
                         if (resource != null) {
                             boolean eqLongImage = MediaUtils.isLongImg(resource.getWidth(),
                                     resource.getHeight());
@@ -159,16 +149,6 @@ public class PicassoEngine implements ImageEngine {
                             }
                         }
                     }
-
-                    @Override
-                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
-                    }
-
-                    @Override
-                    public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                    }
                 });
     }
 
@@ -181,33 +161,23 @@ public class PicassoEngine implements ImageEngine {
      */
     @Override
     public void loadFolderImage(@NonNull Context context, @NonNull String url, @NonNull ImageView imageView) {
-        VideoRequestHandler videoRequestHandler = new VideoRequestHandler();
-        if (PictureMimeType.isContent(url)) {
-            Picasso.get()
-                    .load(Uri.parse(url))
-                    .resize(180, 180)
-                    .centerCrop()
-                    .placeholder(R.drawable.picture_image_placeholder)
-                    .into(imageView);
-        } else {
-            if (PictureMimeType.isUrlHasVideo(url)) {
-                Picasso picasso = new Picasso.Builder(context.getApplicationContext())
-                        .addRequestHandler(videoRequestHandler)
-                        .build();
-                picasso.load(videoRequestHandler.SCHEME_VIDEO + ":" + url)
-                        .resize(180, 180)
-                        .centerCrop()
-                        .placeholder(R.drawable.picture_image_placeholder)
-                        .into(imageView);
-            } else {
-                Picasso.get()
-                        .load(new File(url))
-                        .resize(180, 180)
-                        .centerCrop()
-                        .placeholder(R.drawable.picture_image_placeholder)
-                        .into(imageView);
-            }
-        }
+        Glide.with(context)
+                .asBitmap()
+                .load(url)
+                .override(180, 180)
+                .centerCrop()
+                .sizeMultiplier(0.5f)
+                .apply(new RequestOptions().placeholder(R.drawable.picture_image_placeholder))
+                .into(new BitmapImageViewTarget(imageView) {
+                    @Override
+                    protected void setResource(Bitmap resource) {
+                        RoundedBitmapDrawable circularBitmapDrawable =
+                                RoundedBitmapDrawableFactory.
+                                        create(context.getResources(), resource);
+                        circularBitmapDrawable.setCornerRadius(8);
+                        imageView.setImageDrawable(circularBitmapDrawable);
+                    }
+                });
     }
 
 
@@ -221,15 +191,10 @@ public class PicassoEngine implements ImageEngine {
     @Override
     public void loadAsGifImage(@NonNull Context context, @NonNull String url,
                                @NonNull ImageView imageView) {
-        if (PictureMimeType.isContent(url)) {
-            Picasso.get()
-                    .load(Uri.parse(url))
-                    .into(imageView);
-        } else {
-            Picasso.get()
-                    .load(new File(url))
-                    .into(imageView);
-        }
+        Glide.with(context)
+                .asGif()
+                .load(url)
+                .into(imageView);
     }
 
     /**
@@ -241,45 +206,25 @@ public class PicassoEngine implements ImageEngine {
      */
     @Override
     public void loadGridImage(@NonNull Context context, @NonNull String url, @NonNull ImageView imageView) {
-        VideoRequestHandler videoRequestHandler = new VideoRequestHandler();
-        if (PictureMimeType.isContent(url)) {
-            Picasso.get()
-                    .load(Uri.parse(url))
-                    .resize(200, 200)
-                    .centerCrop()
-                    .placeholder(R.drawable.picture_image_placeholder)
-                    .into(imageView);
-        } else {
-            if (PictureMimeType.isUrlHasVideo(url)) {
-                Picasso picasso = new Picasso.Builder(context.getApplicationContext())
-                        .addRequestHandler(videoRequestHandler)
-                        .build();
-                picasso.load(videoRequestHandler.SCHEME_VIDEO + ":" + url)
-                        .resize(200, 200)
-                        .centerCrop()
-                        .placeholder(R.drawable.picture_image_placeholder)
-                        .into(imageView);
-            } else {
-                Picasso.get()
-                        .load(new File(url))
-                        .resize(200, 200)
-                        .centerCrop()
-                        .placeholder(R.drawable.picture_image_placeholder)
-                        .into(imageView);
-            }
-        }
+        Glide.with(context)
+                .load(url)
+                .override(200, 200)
+                .centerCrop()
+                .apply(new RequestOptions().placeholder(R.drawable.picture_image_placeholder))
+                .into(imageView);
     }
 
-    private PicassoEngine() {
+
+    private GlideEngine() {
     }
 
-    private static PicassoEngine instance;
+    private static GlideEngine instance;
 
-    public static PicassoEngine createPicassoEngine() {
+    public static GlideEngine createGlideEngine() {
         if (null == instance) {
-            synchronized (PicassoEngine.class) {
+            synchronized (GlideEngine.class) {
                 if (null == instance) {
-                    instance = new PicassoEngine();
+                    instance = new GlideEngine();
                 }
             }
         }

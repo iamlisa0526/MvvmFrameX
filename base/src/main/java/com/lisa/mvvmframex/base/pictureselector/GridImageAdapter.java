@@ -2,6 +2,7 @@ package com.lisa.mvvmframex.base.pictureselector;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lisa.mvvmframex.base.R;
-import com.lisa.mvvmframex.base.utils.PicassoUtil;
+import com.lisa.mvvmframex.base.utils.GlideUtil;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -131,7 +132,7 @@ public class GridImageAdapter extends
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.gv_filter_image,
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_grid_image,
                 viewGroup, false);
         final ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -215,7 +216,16 @@ public class GridImageAdapter extends
             if (chooseModel == PictureMimeType.ofAudio()) {
                 viewHolder.mImg.setImageResource(R.drawable.picture_audio_placeholder);
             } else {
-                PicassoUtil.setImage(path, viewHolder.mImg, 0);
+                if (mFragement != null) {
+                    GlideUtil.setFragmentImage(mFragement, PictureMimeType.isContent(path) && !media.isCut() && !media.isCompressed() ? Uri.parse(path)
+                            : path, viewHolder.mImg, R.color.white_f6);
+                }
+
+                if (mActivity != null) {
+                    GlideUtil.setActivityImage(mActivity, PictureMimeType.isContent(path) && !media.isCut() && !media.isCompressed() ? Uri.parse(path)
+                            : path, viewHolder.mImg, R.color.white_f6);
+                }
+
             }
 
             //itemView 的点击事件
@@ -257,7 +267,7 @@ public class GridImageAdapter extends
                                     .setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)// 设置相册Activity方向，不设置默认使用系统
                                     .isNotPreviewDownload(true)// 预览图片长按是否可以下载
                                     //.bindCustomPlayVideoCallback(new MyVideoSelectedPlayCallback(getContext()))// 自定义播放回调控制，用户可以使用自己的视频播放界面
-                                    .imageEngine(PicassoEngine.createPicassoEngine())// 外部传入图片加载引擎，必传项
+                                    .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
                                     .openExternalPreview(position, getData());
                             break;
                     }

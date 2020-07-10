@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             4, GridLayoutManager.VERTICAL, false
         )
         adapter = GridImageAdapter(this, GridImageAdapter.OnAddClickListener {
-            MediaManager.addActivityMultiImage(this,
+            MediaManager.addActivityMultiVideo(this,
                 MultiResultCallback(
                     adapter
                 )

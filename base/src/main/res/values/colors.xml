@@ -5,4 +5,6 @@
     <color name="gray_line">#EEF1F5</color>
     <color name="black_45">#454545</color>
     <color name="page">#f4f4f4</color>
+    <color name="white_f6">#f6f6f6</color>
+    <color name="white_transparent">#00000000</color>
 </resources>

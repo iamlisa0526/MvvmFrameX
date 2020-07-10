@@ -143,8 +143,9 @@ object MediaManager {
         onResultCallbackListener: OnResultCallbackListener<LocalMedia>
     ) {
         selector.openGallery(mimeType) // 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
-            .imageEngine(PicassoEngine.createPicassoEngine())// 外部传入图片加载引擎，必传项
+            .imageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
             .maxSelectNum(maxNum) // 最大图片选择数量
+            .maxVideoSelectNum(maxNum)
             .selectionMode(if (maxNum > 1) PictureConfig.MULTIPLE else PictureConfig.SINGLE) // 多选 or 单选
             .isWeChatStyle(true) //微信style
             .isPreviewImage(true) // 是否可预览图片
