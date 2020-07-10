@@ -32,9 +32,9 @@ object MediaManager {
     @JvmStatic
     fun addFragmentSingleImage(
         context: Fragment,
-        multiResultCallback: MultiResultCallback
+        onResultCallbackListener: OnResultCallbackListener<LocalMedia>
     ) {
-        addFragmentMedia(context, 1, PictureMimeType.ofImage(), multiResultCallback)
+        addFragmentMedia(context, 1, PictureMimeType.ofImage(), onResultCallbackListener)
     }
 
     /**
@@ -55,9 +55,9 @@ object MediaManager {
     @JvmStatic
     fun addFragmentSingleVideo(
         context: Fragment,
-        multiResultCallback: MultiResultCallback
+        onResultCallbackListener: OnResultCallbackListener<LocalMedia>
     ) {
-        addFragmentMedia(context, 1, PictureMimeType.ofVideo(), multiResultCallback)
+        addFragmentMedia(context, 1, PictureMimeType.ofVideo(), onResultCallbackListener)
     }
 
     /**
@@ -91,9 +91,9 @@ object MediaManager {
     @JvmStatic
     fun addActivitySingleImage(
         context: Activity,
-        multiResultCallback: MultiResultCallback
+        onResultCallbackListener: OnResultCallbackListener<LocalMedia>
     ) {
-        addActivityImage(context, 1, PictureMimeType.ofImage(), multiResultCallback)
+        addActivityImage(context, 1, PictureMimeType.ofImage(), onResultCallbackListener)
     }
 
     /**
@@ -114,9 +114,9 @@ object MediaManager {
     @JvmStatic
     fun addActivitySingleVideo(
         context: Activity,
-        multiResultCallback: MultiResultCallback
+        onResultCallbackListener: OnResultCallbackListener<LocalMedia>
     ) {
-        addActivityImage(context, 1, PictureMimeType.ofVideo(), multiResultCallback)
+        addActivityImage(context, 1, PictureMimeType.ofVideo(), onResultCallbackListener)
     }
 
     /**
@@ -127,9 +127,9 @@ object MediaManager {
         context: Activity,
         maxNum: Int,
         mimeType: Int,
-        multiResultCallback: MultiResultCallback
+        onResultCallbackListener: OnResultCallbackListener<LocalMedia>
     ) {
-        setSelectConfig(PictureSelector.create(context), maxNum, mimeType, multiResultCallback)
+        setSelectConfig(PictureSelector.create(context), maxNum, mimeType, onResultCallbackListener)
     }
 
     /**

@@ -39,12 +39,12 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        iv_image.setOnClickListener {
-            MediaManager.addActivitySingleImage(this,
-                MultiResultCallback(
-                    iv_image
-                )
-            )
-        }
+//        iv_image.setOnClickListener {
+//            MediaManager.addActivitySingleImage(this,
+//                MultiResultCallback(
+//                    iv_image
+//                )
+//            )
+//        }
     }
 }

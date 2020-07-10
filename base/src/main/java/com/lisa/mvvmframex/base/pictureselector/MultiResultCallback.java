@@ -1,10 +1,7 @@
 package com.lisa.mvvmframex.base.pictureselector;
 
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
 
-import com.lisa.mvvmframex.base.utils.PicassoUtil;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.listener.OnResultCallbackListener;
 
@@ -18,14 +15,6 @@ public class MultiResultCallback implements OnResultCallbackListener<LocalMedia>
     private final static String TAG = MultiResultCallback.class.getSimpleName();
 
     private WeakReference<GridImageAdapter> mAdapterWeakReference;
-
-    private View mView;
-
-    //单选（图片、视频、音频）
-    public MultiResultCallback(View view) {
-        super();
-        this.mView = view;
-    }
 
     public MultiResultCallback(GridImageAdapter adapter) {
         super();
@@ -54,29 +43,7 @@ public class MultiResultCallback implements OnResultCallbackListener<LocalMedia>
                 mAdapterWeakReference.get().setList(result);
                 mAdapterWeakReference.get().notifyDataSetChanged();
             }
-        } else {//单选
-            if (!result.isEmpty()) {
-                LocalMedia media = result.get(0);
-                String path;
-                if (media.isCut() && !media.isCompressed()) {
-                    // 裁剪过
-                    path = media.getCutPath();
-                } else if (media.isCompressed() || (media.isCut() && media.isCompressed())) {
-                    // 压缩过,或者裁剪同时压缩过,以最终压缩过图片为准
-                    path = media.getCompressPath();
-                } else {
-                    // 原图
-                    path = media.getPath();
-                }
-
-                //图片单选
-                if (mView instanceof ImageView) {
-                    PicassoUtil.setImage(path, (ImageView) mView, 0);
-                }
-
-            }
         }
-
     }
 
     @Override
