@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             4, GridLayoutManager.VERTICAL, false
         )
         adapter = GridImageAdapter(this, GridImageAdapter.OnAddClickListener {
-            MediaManager.addActivityMultiMedia(this, MyResultCallback(adapter))
+            MediaManager.addActivityMultiImage(this, MyResultCallback(adapter))
         })
         recycler_view.adapter = adapter
         recycler_view.addItemDecoration(
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         iv_image.setOnClickListener {
-            MediaManager.addActivitySingleMedia(this, MyResultCallback(iv_image))
+            MediaManager.addActivitySingleImage(this, MyResultCallback(iv_image))
         }
     }
 }
