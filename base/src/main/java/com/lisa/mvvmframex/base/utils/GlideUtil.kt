@@ -124,7 +124,7 @@ object GlideUtil {
             .skipMemoryCache(true)
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
-                    @Nullable e: GlideException?,
+                    e: GlideException?,
                     model: Any?,
                     target: com.bumptech.glide.request.target.Target<Drawable>?,
                     isFirstResource: Boolean
@@ -135,15 +135,16 @@ object GlideUtil {
                 override fun onResourceReady(
                     resource: Drawable,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    target: com.bumptech.glide.request.target.Target<Drawable?>?,
                     dataSource: com.bumptech.glide.load.DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    //判断imageView的填充方式,如果不是fitXY的填充方式 设置其填充方式
-                    if (iv.scaleType !== ImageView.ScaleType.FIT_XY) {
+                    //判断imageView的填充方式,如果不是FIT_XY的填充方式 设置其填充方式
+                    if (iv.scaleType != ImageView.ScaleType.FIT_XY) {
                         iv.scaleType = ImageView.ScaleType.FIT_XY
                     }
-                    //进行宽度为match_parent时的适应imageView的高度计算
+
+                    //进行宽度为match_parent时imageView的高度计算
                     val params = iv.layoutParams
                     val vw = iv.width - iv.paddingLeft - iv.paddingRight
                     val scale = vw.toFloat() / resource.intrinsicWidth.toFloat()
@@ -152,8 +153,9 @@ object GlideUtil {
                     iv.layoutParams = params
                     return false
                 }
+
             })
-            .placeholder(if (placeholder == 0) R.drawable.default_image_placeholder else placeholder)
+            .placeholder(placeholder)
             .into(iv)
     }
 }
