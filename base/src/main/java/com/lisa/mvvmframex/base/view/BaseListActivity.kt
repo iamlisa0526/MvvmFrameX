@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lisa.mvvmframex.base.R
 import com.lisa.mvvmframex.base.dto.BasePageDto
-import com.lisa.mvvmframex.base.network.MyEasyHttp
 import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
@@ -64,7 +63,7 @@ abstract class BaseListActivity<T> : BaseActivity() {
      */
     private fun initRecyclerView() {
         mAdapter = getAdapter()
-        recycler_view.layoutManager = LinearLayoutManager(context)
+        recycler_view.layoutManager = LinearLayoutManager(mContext)
         recycler_view.adapter = mAdapter
     }
 
@@ -109,6 +108,7 @@ abstract class BaseListActivity<T> : BaseActivity() {
      * 请求网络数据
      */
     protected fun request() {
+        if (!isRefresh()) mLoadingLayout.showLoading()
         getGetRequest()
             .execute(object : SimpleCallBack<Any>() {
                 override fun onSuccess(any: Any) {
@@ -213,4 +213,8 @@ abstract class BaseListActivity<T> : BaseActivity() {
      */
     protected abstract fun getAdapter(): RecyclerView.Adapter<*>
 
+    override fun onDestroy() {
+        if (mLoadingDialog.isShowing) mLoadingDialog.dismiss()
+        super.onDestroy()
+    }
 }

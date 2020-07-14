@@ -3,9 +3,13 @@ package com.lisa.mvvmframex.base.view
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lisa.mvvmframex.base.R
+import com.lisa.mvvmframex.base.constants.KeyList
 import com.lisa.mvvmframex.base.dto.BasePageDto
 import com.lisa.mvvmframex.base.network.MyEasyHttp
+import com.lisa.mvvmframex.base.recyclerview.BaseViewHolder
 import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
@@ -107,6 +111,7 @@ abstract class BaseListFragment<T> : BaseFragment() {
      * 请求网络数据
      */
     protected fun request() {
+        if (!isRefresh()) mLoadingLayout.showLoading()
         getGetRequest()
             .execute(object : SimpleCallBack<Any>() {
                 override fun onSuccess(any: Any) {
@@ -210,5 +215,10 @@ abstract class BaseListFragment<T> : BaseFragment() {
      * @return
      */
     protected abstract fun getAdapter(): RecyclerView.Adapter<*>
+
+    override fun onDestroy() {
+        if (mLoadingDialog.isShowing) mLoadingDialog.dismiss()
+        super.onDestroy()
+    }
 
 }
