@@ -134,13 +134,11 @@ public class GridImageAdapter extends
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_grid_image,
                 viewGroup, false);
-        final ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     private boolean isShowAddItem(int position) {
-        int size = list.size() == 0 ? 0 : list.size();
-        return position == size;
+        return position == list.size();
     }
 
     /**
