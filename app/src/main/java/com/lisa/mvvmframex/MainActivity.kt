@@ -3,6 +3,7 @@ package com.lisa.mvvmframex
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.lisa.mvvmframex.base.customview.dialog.LoadingDialog
 import com.lisa.mvvmframex.base.pictureselector.FullyGridLayoutManager
 import com.lisa.mvvmframex.base.pictureselector.GridImageAdapter
 import com.lisa.mvvmframex.base.pictureselector.MediaManager
@@ -19,12 +20,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        LoadingDialog(this@MainActivity).show()
         recycler_view.layoutManager = FullyGridLayoutManager(
             this,
             4, GridLayoutManager.VERTICAL, false
         )
         adapter = GridImageAdapter(this, GridImageAdapter.OnAddClickListener {
-            MediaManager.addActivityMultiImage(this,
+            MediaManager.addActivityMultiImage(
+                this,
                 MultiResultCallback(
                     adapter
                 )

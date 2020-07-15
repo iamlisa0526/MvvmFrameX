@@ -213,8 +213,4 @@ abstract class BaseListActivity<T> : BaseActivity() {
      */
     protected abstract fun getAdapter(): RecyclerView.Adapter<*>
 
-    override fun onDestroy() {
-        if (mLoadingDialog.isShowing) mLoadingDialog.dismiss()
-        super.onDestroy()
-    }
 }

@@ -55,4 +55,9 @@ abstract class BaseFragment : Fragment() {
     @LayoutRes
     abstract fun getLayout(): Int
 
+    override fun onDestroy() {
+        if (mLoadingDialog.isShowing) mLoadingDialog.dismiss()
+        super.onDestroy()
+    }
+
 }

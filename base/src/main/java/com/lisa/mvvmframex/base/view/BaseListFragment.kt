@@ -216,9 +216,4 @@ abstract class BaseListFragment<T> : BaseFragment() {
      */
     protected abstract fun getAdapter(): RecyclerView.Adapter<*>
 
-    override fun onDestroy() {
-        if (mLoadingDialog.isShowing) mLoadingDialog.dismiss()
-        super.onDestroy()
-    }
-
 }

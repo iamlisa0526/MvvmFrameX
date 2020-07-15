@@ -3,7 +3,9 @@ package com.lisa.mvvmframex.base.customview.dialog
 import android.app.Dialog
 import android.content.Context
 import android.view.Gravity
+import android.view.Window
 import android.view.WindowManager
+import com.lisa.mvvmframex.base.R
 
 /**
  * @Description: Dialog基类
@@ -17,6 +19,8 @@ open class BaseDialog : Dialog {
     }
 
     private fun initView(context: Context) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
         val params = window?.attributes
         val screenWidth = context.resources.displayMetrics.widthPixels
         params?.width = screenWidth * 3 / 4

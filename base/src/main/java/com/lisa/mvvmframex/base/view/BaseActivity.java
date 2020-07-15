@@ -59,4 +59,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract @LayoutRes
     int getLayout();
+
+    @Override
+    protected void onDestroy() {
+        if (mLoadingDialog.isShowing()) mLoadingDialog.dismiss();
+        super.onDestroy();
+    }
 }
