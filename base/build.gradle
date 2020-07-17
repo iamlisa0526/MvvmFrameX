@@ -16,7 +16,7 @@ uploadArchives {
         // 项目名称
         pom.artifactId = "base"
         // 版本号
-        pom.version = "1.8.5"
+        pom.version = "1.8.11"
     }
 }
 

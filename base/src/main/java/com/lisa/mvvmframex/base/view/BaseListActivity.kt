@@ -30,8 +30,6 @@ abstract class BaseListActivity<T> : BaseActivity() {
     protected var mList = arrayListOf<T>()
     private lateinit var mAdapter: RecyclerView.Adapter<*>
 
-    private lateinit var mLoadingLayout: LoadingLayout
-
     override fun getLayout(): Int {
         return R.layout.activity_base_list
     }
@@ -73,8 +71,8 @@ abstract class BaseListActivity<T> : BaseActivity() {
      * 配置空数据，错误布局显示
      */
     private fun configLoadingLayout() {
-        mLoadingLayout = LoadingLayout.wrap(recycler_view)
-        mLoadingLayout.setRetryListener {//加载失败，点击重试
+        loading_layout?.showContent()
+        loading_layout?.setRetryListener {//加载失败，点击重试
             pageNo = 1
             request()
         }
@@ -112,7 +110,8 @@ abstract class BaseListActivity<T> : BaseActivity() {
     protected fun request() {
         if (getGetRequest() == null) return
 
-        if (!isRefresh()) mLoadingLayout.showLoading()
+        if (!isRefresh()) loading_layout?.showLoading()
+
         getGetRequest()
             ?.execute(object : SimpleCallBack<Any>() {
                 override fun onSuccess(any: Any) {
@@ -130,12 +129,12 @@ abstract class BaseListActivity<T> : BaseActivity() {
 
                     //显示空数据布局
                     if (hasHeader()) {
-                        mLoadingLayout.showContent()
+                        loading_layout?.showContent()
                     } else {
                         if (mList.isEmpty()) {
-                            mLoadingLayout.showEmpty()
+                            loading_layout?.showEmpty()
                         } else {
-                            mLoadingLayout.showContent()
+                            loading_layout?.showContent()
                         }
                     }
 
@@ -148,12 +147,12 @@ abstract class BaseListActivity<T> : BaseActivity() {
                             refresh_layout?.finishLoadMore(false)//加载失败
                         } else {//刷新
                             refresh_layout?.finishRefresh(false)//刷新失败
-                            mLoadingLayout.setErrorText(e.message)
-                            mLoadingLayout.showError()
+                            loading_layout?.setErrorText(e.message)
+                            loading_layout?.showError()
                         }
                     } else {
-                        mLoadingLayout.setErrorText(e.message)
-                        mLoadingLayout.showError()
+                        loading_layout?.setErrorText(e.message)
+                        loading_layout?.showError()
                     }
 
                     if (401 == e.code) {
