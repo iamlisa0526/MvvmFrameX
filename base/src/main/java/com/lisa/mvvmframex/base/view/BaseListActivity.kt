@@ -102,15 +102,17 @@ abstract class BaseListActivity<T> : BaseActivity() {
      * 子类实现
      * 如：MyEasyHttp.get("/register")
      */
-    protected abstract fun getGetRequest(): GetRequest
+    protected abstract fun getGetRequest(): GetRequest?
 
     /**
      * 请求网络数据
      */
     protected fun request() {
+        if (getGetRequest() == null) return
+
         if (!isRefresh()) mLoadingLayout.showLoading()
         getGetRequest()
-            .execute(object : SimpleCallBack<Any>() {
+            ?.execute(object : SimpleCallBack<Any>() {
                 override fun onSuccess(any: Any) {
                     val result = GsonUtil.toJson(any)
                     Log.i("MyEasyHttp", result)

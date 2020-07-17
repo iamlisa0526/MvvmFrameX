@@ -1,53 +1,42 @@
 package com.lisa.mvvmframex
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import com.lisa.mvvmframex.base.customview.dialog.LoadingDialog
-import com.lisa.mvvmframex.base.pictureselector.FullyGridLayoutManager
-import com.lisa.mvvmframex.base.pictureselector.GridImageAdapter
-import com.lisa.mvvmframex.base.pictureselector.MediaManager
-import com.lisa.mvvmframex.base.pictureselector.MultiResultCallback
-import com.luck.picture.lib.decoration.GridSpacingItemDecoration
-import com.luck.picture.lib.tools.ScreenUtils
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.lisa.mvvmframex.base.recyclerview.BaseAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_text.view.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adapter: GridImageAdapter
+    private val mlist1 = arrayListOf<Any>()
+    private val mlist2 = arrayListOf<Any>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        LoadingDialog(this@MainActivity).show()
-        recycler_view.layoutManager = FullyGridLayoutManager(
-            this,
-            4, GridLayoutManager.VERTICAL, false
-        )
-        adapter = GridImageAdapter(this, GridImageAdapter.OnAddClickListener {
-            MediaManager.addActivityMultiImage(
-                this,
-                MultiResultCallback(
-                    adapter
-                )
-            )
-        })
-        recycler_view.adapter = adapter
-        recycler_view.addItemDecoration(
-            GridSpacingItemDecoration(
-                4,
-                ScreenUtils.dip2px(this, 8f),
-                false
-            )
-        )
+        for (i in 1..10) {
+            mlist1.add(Any())
+        }
 
-//        iv_image.setOnClickListener {
-//            MediaManager.addActivitySingleImage(this,
-//                MultiResultCallback(
-//                    iv_image
-//                )
-//            )
-//        }
+        for (i in 1..40) {
+            mlist2.add(Any())
+        }
+
+        rv1.layoutManager = LinearLayoutManager(this)
+        rv1.adapter = object : BaseAdapter<Any>(mlist1, R.layout.item_text) {
+            override fun onBindViewHolder(itemView: View, model: Any, position: Int) {
+                itemView.tv.text="11111111111111"
+            }
+        }
+
+        rv2.layoutManager = LinearLayoutManager(this)
+        rv2.adapter = object : BaseAdapter<Any>(mlist2, R.layout.item_text) {
+            override fun onBindViewHolder(itemView: View, model: Any, position: Int) {
+                itemView.tv.text="222222222222222"
+            }
+        }
     }
 }
