@@ -21,7 +21,9 @@ import org.jetbrains.anko.toast
  */
 abstract class BaseListActivity<T> : BaseActivity() {
     protected var pageNo = 1
-    protected val pageSize = 15
+
+    //todo 改回15
+    protected val pageSize = 5
     private var basePageDto = BasePageDto<T>()
     private var unPageDto = arrayListOf<T>()
 
@@ -127,10 +129,14 @@ abstract class BaseListActivity<T> : BaseActivity() {
                     }
 
                     //显示空数据布局
-                    if (mList.isEmpty()) {
-                        mLoadingLayout.showEmpty()
-                    } else {
+                    if (hasHeader()) {
                         mLoadingLayout.showContent()
+                    } else {
+                        if (mList.isEmpty()) {
+                            mLoadingLayout.showEmpty()
+                        } else {
+                            mLoadingLayout.showContent()
+                        }
                     }
 
                 }
@@ -156,6 +162,13 @@ abstract class BaseListActivity<T> : BaseActivity() {
                     }
                 }
             })
+    }
+
+    /**
+     * 是否有头部
+     */
+    open fun hasHeader(): Boolean {
+        return false
     }
 
     /**

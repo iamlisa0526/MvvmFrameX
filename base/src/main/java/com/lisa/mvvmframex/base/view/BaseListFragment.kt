@@ -131,10 +131,14 @@ abstract class BaseListFragment<T> : BaseFragment() {
                     }
 
                     //显示空数据布局
-                    if (mList.isEmpty()) {
-                        mLoadingLayout.showEmpty()
-                    } else {
+                    if (hasHeader()) {
                         mLoadingLayout.showContent()
+                    } else {
+                        if (mList.isEmpty()) {
+                            mLoadingLayout.showEmpty()
+                        } else {
+                            mLoadingLayout.showContent()
+                        }
                     }
 
                 }
@@ -219,4 +223,10 @@ abstract class BaseListFragment<T> : BaseFragment() {
      */
     protected abstract fun getAdapter(): RecyclerView.Adapter<*>
 
+    /**
+     * 是否有头部
+     */
+    open fun hasHeader(): Boolean {
+        return false
+    }
 }
