@@ -23,7 +23,7 @@ abstract class BaseListActivity<T> : BaseActivity() {
     protected var pageNo = 1
 
     //todo 改回15
-    protected val pageSize = 5
+    protected val pageSize = 15
     private var basePageDto = BasePageDto<T>()
     private var unPageDto = arrayListOf<T>()
 

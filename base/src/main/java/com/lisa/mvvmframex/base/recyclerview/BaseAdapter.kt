@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
  * @CreateDate:     2020/5/28 13:48
  */
 
-abstract class BaseAdapter<T>(private val list: List<T>, @LayoutRes private val layoutId: Int) : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseAdapter<T>(private val list: List<T>, @LayoutRes private val layoutId: Int) :
+    RecyclerView.Adapter<BaseViewHolder>() {
     private var mItemListener: OnItemClickListener<T>? = null
 
     fun setOnItemClickListener(mListener: OnItemClickListener<T>): BaseAdapter<T> {
@@ -26,7 +27,16 @@ abstract class BaseAdapter<T>(private val list: List<T>, @LayoutRes private val 
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         onBindViewHolder(holder.itemView, list[position], position)
-        holder.itemView.setOnClickListener { mItemListener?.onItemClick(it, position, list[position]) }
+        mItemListener?.let {
+            holder.itemView.setOnClickListener {
+                mItemListener?.onItemClick(
+                    it,
+                    position,
+                    list[position]
+                )
+            }
+        }
+
     }
 
     protected abstract fun onBindViewHolder(itemView: View, model: T, position: Int)
