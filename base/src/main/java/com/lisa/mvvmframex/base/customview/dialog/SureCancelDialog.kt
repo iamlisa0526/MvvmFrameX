@@ -2,6 +2,7 @@ package com.lisa.mvvmframex.base.customview.dialog
 
 import android.content.Context
 import android.text.SpannableStringBuilder
+import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
@@ -25,26 +26,6 @@ class SureCancelDialog : BaseDialog {
      * 取消点击
      */
     private var cancelListener: View.OnClickListener? = null
-
-    /**
-     * 标题id
-     */
-    private var titleStringRes = 0
-
-    /**
-     * 内容id
-     */
-    private var contentStringRes = 0
-
-    /**
-     * 确认文本id
-     */
-    private var sureTextStringRes = 0
-
-    /**
-     * 取消文本id
-     */
-    private var cancelTextStringRes = 0
 
     constructor(context: Context) : super(context) {
         initView(context)
@@ -89,10 +70,24 @@ class SureCancelDialog : BaseDialog {
      * 设置标题
      */
     fun title(@StringRes titleStringRes: Int): SureCancelDialog {
-        this.titleStringRes = titleStringRes
-        if (this.titleStringRes != 0) {
-            tv_title_dialog.text = context.getString(this.titleStringRes)
+        if (titleStringRes != 0) {
+            tv_title_dialog.text = context.getString(titleStringRes)
             tv_title_dialog.visibility = View.VISIBLE
+        } else {
+            tv_title_dialog.visibility = View.GONE
+        }
+        return this
+    }
+
+    /**
+     * 设置标题
+     */
+    fun title(title: String): SureCancelDialog {
+        if (!TextUtils.isEmpty(title)) {
+            tv_title_dialog.text = title
+            tv_title_dialog.visibility = View.VISIBLE
+        } else {
+            tv_title_dialog.visibility = View.GONE
         }
         return this
     }
@@ -101,10 +96,24 @@ class SureCancelDialog : BaseDialog {
      * 设置内容
      */
     fun content(@StringRes contentStringRes: Int): SureCancelDialog {
-        this.contentStringRes = contentStringRes
-        if (this.contentStringRes != 0) {
-            tv_content.text = context.getString(this.contentStringRes)
+        if (contentStringRes != 0) {
+            tv_content.text = context.getString(contentStringRes)
             tv_content.visibility = View.VISIBLE
+        } else {
+            tv_content.visibility = View.GONE
+        }
+        return this
+    }
+
+    /**
+     * 设置内容
+     */
+    fun content(content: String): SureCancelDialog {
+        if (!TextUtils.isEmpty(content)) {
+            tv_content.text = content
+            tv_content.visibility = View.VISIBLE
+        } else {
+            tv_content.visibility = View.GONE
         }
         return this
     }
@@ -113,8 +122,7 @@ class SureCancelDialog : BaseDialog {
      * 确认文本
      */
     fun sureText(@StringRes sureTextStringRes: Int): SureCancelDialog {
-        this.sureTextStringRes = sureTextStringRes
-        tv_sure.text = context.getString(this.sureTextStringRes)
+        tv_sure.text = context.getString(sureTextStringRes)
         return this
     }
 
@@ -122,8 +130,7 @@ class SureCancelDialog : BaseDialog {
      * 取消文本
      */
     fun cancelText(@StringRes cancelTextStringRes: Int): SureCancelDialog {
-        this.cancelTextStringRes = cancelTextStringRes
-        tv_cancel.text = context.getString(this.cancelTextStringRes)
+        tv_cancel.text = context.getString(cancelTextStringRes)
         return this
     }
 
