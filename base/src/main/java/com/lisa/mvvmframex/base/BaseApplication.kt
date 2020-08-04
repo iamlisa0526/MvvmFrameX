@@ -7,6 +7,7 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.tamsiree.rxkit.RxTool
 import com.zhouyou.http.EasyHttp
 import com.zhouyou.http.model.HttpHeaders
 import okhttp3.Interceptor
@@ -31,6 +32,9 @@ abstract class BaseApplication : Application() {
         super.onCreate()
         application = this
         configRxEasyHttp()
+
+        //RxTool
+        RxTool.init(this)
     }
 
     /**

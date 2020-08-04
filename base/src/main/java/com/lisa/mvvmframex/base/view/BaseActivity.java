@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
-import com.lisa.mvvmframex.base.constants.KeyList;
 import com.lisa.mvvmframex.base.customview.dialog.LoadingDialog;
 import com.zhouyou.http.subsciber.IProgressDialog;
 
@@ -43,17 +42,29 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         };
 
-        //关闭activity
-        LiveEventBus.get(KeyList.EKEY_CLOSE_ACTIVITY, Boolean.class)
+        init();
+    }
+
+    /**
+     * 注册关闭activity事件
+     */
+    protected void registerCloseEvent() {
+        LiveEventBus.get("CLOSE_ACTIVITY", Boolean.class)
                 .observe(this, new Observer<Boolean>() {
                     @Override
                     public void onChanged(Boolean b) {
                         if (b) finish();
                     }
                 });
-
-        init();
     }
+
+    /**
+     * 发送关闭activity事件
+     */
+    protected void sendCloseEvent() {
+        LiveEventBus.get("CLOSE_ACTIVITY", Boolean.class).post(true);
+    }
+
 
     protected abstract void init();
 

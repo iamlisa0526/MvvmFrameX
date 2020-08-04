@@ -27,12 +27,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.google.android.material.tabs.TabLayout
+            <com.tamsiree.rxui.view.tablayout.TGlideTabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/bottom_gray_line_bg_white"
-                app:tabIndicatorColor="@color/primary" />
+                app:indicator_color="@color/primary"
+                app:tab_padding="20dp"
+                app:tab_space_equal="true"
+                app:textSelectColor="@color/black_45"
+                app:textUnSelectColor="@color/black_45" />
 
             <!--页面Middle-->
             <FrameLayout

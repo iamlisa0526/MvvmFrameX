@@ -3,18 +3,12 @@ package com.lisa.mvvmframex.base.view
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lisa.mvvmframex.base.R
-import com.lisa.mvvmframex.base.constants.KeyList
 import com.lisa.mvvmframex.base.dto.BasePageDto
-import com.lisa.mvvmframex.base.network.MyEasyHttp
-import com.lisa.mvvmframex.base.recyclerview.BaseViewHolder
 import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
 import com.zhouyou.http.request.GetRequest
-import ezy.ui.layout.LoadingLayout
 import kotlinx.android.synthetic.main.activity_base_list.*
 import org.jetbrains.anko.toast
 

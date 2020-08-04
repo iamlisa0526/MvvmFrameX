@@ -1,12 +1,9 @@
 package com.lisa.mvvmframex.base.view
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayout
 import com.lisa.mvvmframex.base.R
 import com.lisa.mvvmframex.base.adapter.BaseTabAdapter
-import com.lisa.mvvmframex.base.utils.TabLayoutUtils
 import kotlinx.android.synthetic.main.activity_base_tab.*
 import java.util.*
 
@@ -28,9 +25,7 @@ abstract class BaseTabActivity : BaseActivity() {
 
         vp_fragment.adapter =
             BaseTabAdapter(supportFragmentManager, getTitles(), getFragments(fragments))
-        tab_layout.tabMode = TabLayout.MODE_FIXED
-        tab_layout.setupWithViewPager(vp_fragment)
-        TabLayoutUtils.setIndicator(tab_layout, 25, 25) //设置tab中item的margin
+        tab_layout.setViewPager(vp_fragment)
     }
 
     abstract fun getTitles(): Array<String>

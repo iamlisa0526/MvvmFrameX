@@ -10,7 +10,6 @@ import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
 import com.zhouyou.http.request.GetRequest
-import ezy.ui.layout.LoadingLayout
 import kotlinx.android.synthetic.main.activity_base_list.*
 import org.jetbrains.anko.toast
 
