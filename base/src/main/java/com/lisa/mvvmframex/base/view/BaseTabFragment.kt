@@ -3,7 +3,7 @@ package com.lisa.mvvmframex.base.view
 import androidx.fragment.app.Fragment
 import com.lisa.mvvmframex.base.R
 import com.lisa.mvvmframex.base.adapter.BaseTabAdapter
-import kotlinx.android.synthetic.main.activity_base_tab.*
+import kotlinx.android.synthetic.main.layout_base_tab.*
 import java.util.*
 
 /**
@@ -16,7 +16,7 @@ abstract class BaseTabFragment : BaseFragment() {
     private var fragments = ArrayList<Fragment>()
 
     override fun getLayout(): Int {
-        return R.layout.activity_base_tab
+        return R.layout.layout_base_tab
     }
 
     override fun init() {
