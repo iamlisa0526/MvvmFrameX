@@ -31,7 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mContext = this;
 
-        setContentView(getLayout());
+        if (getLayout() != 0) setContentView(getLayout());
 
         mLoadingDialog = new LoadingDialog(mContext);
 
