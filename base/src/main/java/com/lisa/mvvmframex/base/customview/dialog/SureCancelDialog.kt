@@ -18,6 +18,25 @@ import kotlinx.android.synthetic.main.dialog_sure_cancel.*
  */
 class SureCancelDialog : BaseDialog {
     /**
+     * 列表传输的item数据
+     */
+    private var mItemData: Any? = null
+
+    /**
+     * 用于列表中的dialog
+     */
+    fun setItemData(itemData: Any?) {
+        this.mItemData = itemData
+    }
+
+    /**
+     * 用于列表中的dialog
+     */
+    fun getItemData(): Any? {
+        return this.mItemData
+    }
+
+    /**
      * 确认点击
      */
     private var sureListener: View.OnClickListener? = null
