@@ -6,9 +6,11 @@ import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.StringRes
 import com.lisa.mvvmframex.base.R
 import kotlinx.android.synthetic.main.dialog_edit.*
+import org.jetbrains.anko.toast
 
 
 /**
@@ -39,7 +41,7 @@ class EditDialog : BaseDialog {
     /**
      * 确认点击
      */
-    private var sureListener: View.OnClickListener? = null
+    private var sureListener: OnSureClickListener? = null
 
     /**
      * 取消点击
@@ -57,7 +59,12 @@ class EditDialog : BaseDialog {
 
         //确认
         tv_sure.setOnClickListener {
-            sureListener?.onClick(tv_sure)
+            val content = et_content.text.toString()
+            if (TextUtils.isEmpty(content)) {
+                context.toast(if (!TextUtils.isEmpty(et_content.hint.toString())) et_content.hint.toString() else "请输入")
+                return@setOnClickListener
+            }
+            sureListener?.onSureClick(tv_sure, content)
             dismiss()
         }
 
@@ -72,7 +79,7 @@ class EditDialog : BaseDialog {
     /**
      * 设置确认点击事件
      */
-    fun onSureListener(sureListener: View.OnClickListener): EditDialog {
+    fun onSureListener(sureListener: OnSureClickListener): EditDialog {
         this.sureListener = sureListener
         return this
     }
@@ -176,5 +183,13 @@ class EditDialog : BaseDialog {
         et_content.visibility = View.VISIBLE
         return this
     }
+
+}
+
+/**
+ * 确认点击
+ */
+interface OnSureClickListener {
+    fun onSureClick(view: View, content: String)
 
 }
