@@ -155,7 +155,6 @@ abstract class BaseListActivity<T> : BaseActivity() {
                     }
 
                     if (401 == e.code) {
-                        toast("授权已过期，请重新登录")
                         go2Login()
                     }
                 }

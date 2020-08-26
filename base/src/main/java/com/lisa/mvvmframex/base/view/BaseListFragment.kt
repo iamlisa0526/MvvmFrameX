@@ -152,7 +152,6 @@ abstract class BaseListFragment<T> : BaseFragment() {
                     }
 
                     if (401 == e.code) {
-                        context?.toast("授权已过期，请重新登录")
                         go2Login()
                     }
                 }
