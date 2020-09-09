@@ -12,6 +12,7 @@ import com.zhouyou.http.exception.ApiException
 import com.zhouyou.http.request.GetRequest
 import kotlinx.android.synthetic.main.activity_base_list.*
 import org.jetbrains.anko.toast
+import java.lang.NullPointerException
 
 /**
  * @Description:    列表Activity基类
@@ -156,6 +157,10 @@ abstract class BaseListActivity<T> : BaseActivity() {
 
                     if (401 == e.code) {
                         go2Login()
+                    }
+
+                    if (e.code == 1010) {//data==null时返回NullPointerException
+                        onSuccess(Any())
                     }
                 }
             })

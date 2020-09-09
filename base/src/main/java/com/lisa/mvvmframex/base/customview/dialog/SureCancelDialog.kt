@@ -146,10 +146,26 @@ class SureCancelDialog : BaseDialog {
     }
 
     /**
+     * 确认文本
+     */
+    fun sureText(sureText: String): SureCancelDialog {
+        tv_sure.text = sureText
+        return this
+    }
+
+    /**
      * 取消文本
      */
     fun cancelText(@StringRes cancelTextStringRes: Int): SureCancelDialog {
         tv_cancel.text = context.getString(cancelTextStringRes)
+        return this
+    }
+
+    /**
+     * 取消文本
+     */
+    fun cancelText(cancelText: String): SureCancelDialog {
+        tv_cancel.text = cancelText
         return this
     }
 

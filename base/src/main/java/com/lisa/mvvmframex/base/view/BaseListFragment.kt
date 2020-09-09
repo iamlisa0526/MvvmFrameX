@@ -9,8 +9,9 @@ import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
 import com.zhouyou.http.request.GetRequest
+import com.zhouyou.http.request.PostRequest
 import kotlinx.android.synthetic.main.activity_base_list.*
-import org.jetbrains.anko.toast
+import java.lang.NullPointerException
 
 /**
  * @Description:    列表Fragment基类
@@ -100,62 +101,135 @@ abstract class BaseListFragment<T> : BaseFragment() {
     protected abstract fun getGetRequest(): GetRequest?
 
     /**
+     * 子类需要覆写即可
+     * 如：MyEasyHttp.post("/register")
+     */
+    open fun getPostRequest(): PostRequest? {
+        return null
+    }
+
+    /**
      * 请求网络数据
      */
     protected fun request() {
 
-        if (getGetRequest() == null) return
-
         if (!isRefresh()) loading_layout?.showLoading()
 
-        getGetRequest()
-            ?.execute(object : SimpleCallBack<Any>() {
-                override fun onSuccess(any: Any) {
-                    val result = GsonUtil.toJson(any)
-                    Log.i("MyEasyHttp", result)
-                    if (isRefresh()) {//分页
-                        basePageDto = getBasePageDto(result)
-                        updatePageData()
-                    } else {//不分页
-                        unPageDto = getUnPageDto(result)
-                        mList.clear()
-                        mList.addAll(unPageDto)
-                        mAdapter.notifyDataSetChanged()
-                    }
+        requestGet()
 
-                    //显示空数据布局
-                    if (hasHeader()) {
-                        loading_layout?.showContent()
-                    } else {
-                        if (mList.isEmpty()) {
-                            loading_layout?.showEmpty()
-                        } else {
-                            loading_layout?.showContent()
-                        }
-                    }
+        requestPost()
+    }
 
+    /**
+     * get请求
+     */
+    private fun requestGet() {
+        getGetRequest()?.execute(object : SimpleCallBack<Any>() {
+            override fun onSuccess(any: Any) {
+                val result = GsonUtil.toJson(any)
+                Log.i("MyEasyHttp", result)
+                if (isRefresh()) {//分页
+                    basePageDto = getBasePageDto(result)
+                    updatePageData()
+                } else {//不分页
+                    unPageDto = getUnPageDto(result)
+                    mList.clear()
+                    mList.addAll(unPageDto)
+                    mAdapter.notifyDataSetChanged()
                 }
 
-                override fun onError(e: ApiException) {
-                    if (isRefresh()) {
-                        if (pageNo > 1) {//加载
-                            pageNo--
-                            refresh_layout?.finishLoadMore(false)//加载失败
-                        } else {//刷新
-                            refresh_layout?.finishRefresh(false)//刷新失败
-                            loading_layout?.setErrorText(e.message)
-                            loading_layout?.showError()
-                        }
+                //显示空数据布局
+                if (hasHeader()) {
+                    loading_layout?.showContent()
+                } else {
+                    if (mList.isEmpty()) {
+                        loading_layout?.showEmpty()
                     } else {
+                        loading_layout?.showContent()
+                    }
+                }
+
+            }
+
+            override fun onError(e: ApiException) {
+                if (isRefresh()) {
+                    if (pageNo > 1) {//加载
+                        pageNo--
+                        refresh_layout?.finishLoadMore(false)//加载失败
+                    } else {//刷新
+                        refresh_layout?.finishRefresh(false)//刷新失败
                         loading_layout?.setErrorText(e.message)
                         loading_layout?.showError()
                     }
+                } else {
+                    loading_layout?.setErrorText(e.message)
+                    loading_layout?.showError()
+                }
 
-                    if (401 == e.code) {
-                        go2Login()
+                if (401 == e.code) {
+                    go2Login()
+                }
+
+                if (e.code == 1010) {//data==null时返回NullPointerException
+                    onSuccess(Any())
+                }
+            }
+        })
+
+    }
+
+    /**
+     * post请求
+     */
+    private fun requestPost() {
+        getPostRequest()?.execute(object : SimpleCallBack<Any>() {
+            override fun onSuccess(any: Any) {
+                val result = GsonUtil.toJson(any)
+                Log.i("MyEasyHttp", result)
+                if (isRefresh()) {//分页
+                    basePageDto = getBasePageDto(result)
+                    updatePageData()
+                } else {//不分页
+                    unPageDto = getUnPageDto(result)
+                    mList.clear()
+                    mList.addAll(unPageDto)
+                    mAdapter.notifyDataSetChanged()
+                }
+
+                //显示空数据布局
+                if (hasHeader()) {
+                    loading_layout?.showContent()
+                } else {
+                    if (mList.isEmpty()) {
+                        loading_layout?.showEmpty()
+                    } else {
+                        loading_layout?.showContent()
                     }
                 }
-            })
+
+            }
+
+            override fun onError(e: ApiException) {
+                if (isRefresh()) {
+                    if (pageNo > 1) {//加载
+                        pageNo--
+                        refresh_layout?.finishLoadMore(false)//加载失败
+                    } else {//刷新
+                        refresh_layout?.finishRefresh(false)//刷新失败
+                        loading_layout?.setErrorText(e.message)
+                        loading_layout?.showError()
+                    }
+                } else {
+                    loading_layout?.setErrorText(e.message)
+                    loading_layout?.showError()
+                }
+
+                if (401 == e.code) {
+                    go2Login()
+                }
+            }
+        })
+
     }
 
     /**
