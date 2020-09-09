@@ -5,13 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lisa.mvvmframex.base.R
 import com.lisa.mvvmframex.base.dto.BasePageDto
+import com.lisa.mvvmframex.base.qo.BasePostQo
 import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
 import com.zhouyou.http.request.GetRequest
 import com.zhouyou.http.request.PostRequest
 import kotlinx.android.synthetic.main.activity_base_list.*
-import java.lang.NullPointerException
 
 /**
  * @Description:    列表Fragment基类
@@ -26,6 +26,11 @@ abstract class BaseListFragment<T> : BaseFragment() {
 
     protected var mList = arrayListOf<T>()
     private lateinit var mAdapter: RecyclerView.Adapter<*>
+
+    /**
+     * Post请求Qo
+     */
+    private val mBasePostQo = BasePostQo()
 
     override fun getLayout(): Int {
         return R.layout.activity_base_list
@@ -70,6 +75,7 @@ abstract class BaseListFragment<T> : BaseFragment() {
         loading_layout?.showContent()
         loading_layout?.setRetryListener {//加载失败，点击重试
             pageNo = 1
+            mBasePostQo.page = 1
             request()
         }
     }
@@ -84,12 +90,14 @@ abstract class BaseListFragment<T> : BaseFragment() {
         //刷新监听
         refresh_layout?.setOnRefreshListener {
             pageNo = 1
+            mBasePostQo.page = 1
             request()
         }
 
         //加载更多监听
         refresh_layout?.setOnLoadMoreListener {
             pageNo++
+            mBasePostQo.page++
             request()
         }
     }
@@ -153,8 +161,9 @@ abstract class BaseListFragment<T> : BaseFragment() {
 
             override fun onError(e: ApiException) {
                 if (isRefresh()) {
-                    if (pageNo > 1) {//加载
+                    if (pageNo > 1 || mBasePostQo.page > 1) {//加载
                         pageNo--
+                        mBasePostQo.page--
                         refresh_layout?.finishLoadMore(false)//加载失败
                     } else {//刷新
                         refresh_layout?.finishRefresh(false)//刷新失败
@@ -211,8 +220,9 @@ abstract class BaseListFragment<T> : BaseFragment() {
 
             override fun onError(e: ApiException) {
                 if (isRefresh()) {
-                    if (pageNo > 1) {//加载
+                    if (pageNo > 1 || mBasePostQo.page > 1) {//加载
                         pageNo--
+                        mBasePostQo.page--
                         refresh_layout?.finishLoadMore(false)//加载失败
                     } else {//刷新
                         refresh_layout?.finishRefresh(false)//刷新失败
@@ -242,14 +252,14 @@ abstract class BaseListFragment<T> : BaseFragment() {
      */
     private fun updatePageData() {
 
-        if (pageNo == 1) {//刷新时清空列表
+        if (pageNo == 1 || mBasePostQo.page == 1) {//刷新时清空列表
             mList.clear()
         }
 
         mList.addAll(basePageDto.content)
         mAdapter.notifyDataSetChanged()
 
-        if (pageNo == 1) {//刷新
+        if (pageNo == 1 || mBasePostQo.page == 1) {//刷新
             if (mList.size < pageSize) {
                 //完成刷新并标记没有更多数据
                 refresh_layout?.finishRefreshWithNoMoreData()

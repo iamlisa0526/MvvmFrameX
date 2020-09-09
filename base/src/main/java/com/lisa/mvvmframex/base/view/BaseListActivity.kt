@@ -6,13 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lisa.mvvmframex.base.R
 import com.lisa.mvvmframex.base.dto.BasePageDto
+import com.lisa.mvvmframex.base.qo.BasePostQo
 import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.zhouyou.http.callback.SimpleCallBack
 import com.zhouyou.http.exception.ApiException
 import com.zhouyou.http.request.GetRequest
 import kotlinx.android.synthetic.main.activity_base_list.*
-import org.jetbrains.anko.toast
-import java.lang.NullPointerException
 
 /**
  * @Description:    列表Activity基类
@@ -21,14 +20,17 @@ import java.lang.NullPointerException
  */
 abstract class BaseListActivity<T> : BaseActivity() {
     protected var pageNo = 1
-
-    //todo 改回15
     protected val pageSize = 15
     private var basePageDto = BasePageDto<T>()
     private var unPageDto = arrayListOf<T>()
 
     protected var mList = arrayListOf<T>()
     private lateinit var mAdapter: RecyclerView.Adapter<*>
+
+    /**
+     * Post请求Qo
+     */
+    private val mBasePostQo = BasePostQo()
 
     override fun getLayout(): Int {
         return R.layout.activity_base_list
@@ -74,6 +76,7 @@ abstract class BaseListActivity<T> : BaseActivity() {
         loading_layout?.showContent()
         loading_layout?.setRetryListener {//加载失败，点击重试
             pageNo = 1
+            mBasePostQo.page = 1
             request()
         }
     }
@@ -88,12 +91,14 @@ abstract class BaseListActivity<T> : BaseActivity() {
         //刷新监听
         refresh_layout?.setOnRefreshListener {
             pageNo = 1
+            mBasePostQo.page = 1
             request()
         }
 
         //加载更多监听
         refresh_layout?.setOnLoadMoreListener {
             pageNo++
+            mBasePostQo.page++
             request()
         }
     }
@@ -142,8 +147,9 @@ abstract class BaseListActivity<T> : BaseActivity() {
 
                 override fun onError(e: ApiException) {
                     if (isRefresh()) {
-                        if (pageNo > 1) {//加载
+                        if (pageNo > 1 || mBasePostQo.page > 1) {//加载
                             pageNo--
+                            mBasePostQo.page--
                             refresh_layout?.finishLoadMore(false)//加载失败
                         } else {//刷新
                             refresh_layout?.finishRefresh(false)//刷新失败
@@ -183,14 +189,14 @@ abstract class BaseListActivity<T> : BaseActivity() {
      */
     private fun updatePageData() {
 
-        if (pageNo == 1) {//刷新时清空列表
+        if (pageNo == 1 || mBasePostQo.page == 1) {//刷新时清空列表
             mList.clear()
         }
 
         mList.addAll(basePageDto.content)
         mAdapter.notifyDataSetChanged()
 
-        if (pageNo == 1) {//刷新
+        if (pageNo == 1 || mBasePostQo.page == 1) {//刷新
             if (mList.size < pageSize) {
                 //完成刷新并标记没有更多数据
                 refresh_layout?.finishRefreshWithNoMoreData()

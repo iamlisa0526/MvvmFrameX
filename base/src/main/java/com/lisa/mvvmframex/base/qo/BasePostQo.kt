@@ -5,15 +5,15 @@ package com.lisa.mvvmframex.base.qo
  * @Author:         lisa
  * @CreateDate:     2020/9/9 15:04
  */
-class BasePostQo {
+open class BasePostQo {
     /**
      * 页码
      */
-    var page = 1
+    var page: Int = 1
 
     /**
      * 每页条数
      */
-    var size = 15
+    var size: Int = 15
 
 }
