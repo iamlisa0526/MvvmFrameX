@@ -121,7 +121,7 @@ abstract class BaseListFragment<T> : BaseFragment() {
      */
     protected fun request() {
 
-        if (!isRefresh()) loading_layout?.showLoading()
+        if (getGetRequest() != null || getPostRequest() != null) loading_layout?.showLoading()
 
         requestGet()
 
