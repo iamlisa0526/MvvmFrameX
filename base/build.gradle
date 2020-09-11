@@ -16,7 +16,7 @@ uploadArchives {
         // 项目名称
         pom.artifactId = "base"
         // 版本号
-        pom.version = "2.1"
+        pom.version = "2.2"
     }
 }
 
@@ -64,6 +64,9 @@ dependencies {
     //kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api 'org.jetbrains.anko:anko:0.10.4'
+
+    //版本更新库，适配android10
+    api 'com.github.AlexLiuSheng:CheckVersionLib:2.4_androidx'
 
     //动画（2.8.0及以上版本需要迁移到androidx）
     api 'com.airbnb.android:lottie:2.8.0'
