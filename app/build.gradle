@@ -4,6 +4,9 @@ apply plugin: 'cc-register'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+//todo 难道需要的模块都要集成吗？使用kapt依赖rxhttp-compiler，需要导入kapt插件
+//apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -31,6 +34,16 @@ android {
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //todo 修复bug
+    /**
+     * * What went wrong:
+     * Execution failed for task ':app:transformResourcesWithMergeJavaResForDebug'.
+     * > More than one file was found with OS independent path 'META-INF/proguard/coroutines.pro'
+     */
+    packagingOptions {
+        exclude 'META-INF/proguard/coroutines.pro'
     }
 
 }

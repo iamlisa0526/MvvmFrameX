@@ -1,17 +1,12 @@
 package com.lisa.mvvmframex
 
-import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.lisa.mvvmframex.base.customview.dialog.EditDialog
-import com.lisa.mvvmframex.base.recyclerview.BaseAdapter
+import android.util.Log
+import com.lisa.mvvmframex.base.network.MyApiResult
+import com.lisa.mvvmframex.base.utils.GsonUtil
 import com.lisa.mvvmframex.base.view.BaseActivity
-import com.lisa.mvvmframex.base.view.BaseTabActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_text.view.*
-import java.util.ArrayList
+import rxhttp.RxHttp
+
 
 class MainActivity : BaseActivity() {
     override fun getLayout(): Int {
@@ -19,9 +14,15 @@ class MainActivity : BaseActivity() {
     }
 
     override fun init() {
-        val dialog = EditDialog(mContext).title("修改昵称")
-            .hint("请输入昵称")
-        btn1.setOnClickListener { dialog.show() }
+        btn1.setOnClickListener { rxhttpRequest() }
+    }
+
+    private fun rxhttpRequest() {
+        RxHttp.get("/community/web/moment/hot/rule/findOne") //第一步, 通过get、postXxx、putXxx等方法，确定请求类型
+            .addHeader(
+                "Authorization",
+                "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJST0xFX1NFTklPUiJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9QTEFUSU5VTV9BR0VOVCJ9XSwidXNlcl9uYW1lIjoiMTU4Njg4OTI2NDciLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNjAwODI2NzM5LCJhdXRob3JpdGllcyI6WyJST0xFX1NFTklPUiIsIlJPTEVfUExBVElOVU1fQUdFTlQiXSwianRpIjoiOGQ1ZWFlOWQtZmQwNS00OGRiLWI3YzEtMDNiNzE4YWQ3NDJhIiwiY2xpZW50X2lkIjoiZ2F0ZXdheSIsInVzZXJuYW1lIjoiMTU4Njg4OTI2NDcifQ.HRHQ_LIdtcbocsgWhe19l1NzlK4qwhiX8rnoCBRDhhE76uN2s-3Ms7t2QQEIhe94pkb3LonL9qaE6ySYj1plXTzYueUv_SPZDLQ3-6prjF-00Jy-TIYg3LoWzna6d95TZxWSfe0D8uO4PvNzViELQqveJa2r5GAvYzPLhW9pDrlgxedL1uGD5v94irPz4isJ_ZllS3RLopVQf0lDkR_wYMjonRZQfaPY73QGa9FiWF3ivJ3xuq5_NYk_iR_4T8myjzlVF5OuRRD2SVgH8jJjV4PrpGVGLK2mUDCBlkIouBkv1ToNwChglKIleV2va633JAaiweTo7gPcY21reewRtw"
+            )
     }
 
 
