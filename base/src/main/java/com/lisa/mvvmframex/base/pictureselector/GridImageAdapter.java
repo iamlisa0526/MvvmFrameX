@@ -3,6 +3,7 @@ package com.lisa.mvvmframex.base.pictureselector;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -177,8 +178,14 @@ public class GridImageAdapter extends
                 // 压缩过,或者裁剪同时压缩过,以最终压缩过图片为准
                 path = media.getCompressPath();
             } else {
-                // 原图
-                path = media.getPath();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {//Android10及以上
+                    // AndroidQ特有地址
+                    path = media.getAndroidQToPath();
+                } else {
+                    // 原图
+                    path = media.getPath();
+                }
+
             }
 
             Log.i(TAG, "原图地址::" + media.getPath());
