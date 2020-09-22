@@ -4,9 +4,6 @@ apply plugin: 'cc-register'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-//todo 难道需要的模块都要集成吗？使用kapt依赖rxhttp-compiler，需要导入kapt插件
-//apply plugin: 'kotlin-kapt'
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 

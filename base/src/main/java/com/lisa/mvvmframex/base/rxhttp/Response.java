@@ -1,4 +1,4 @@
-package com.lisa.mvvmframex;
+package com.lisa.mvvmframex.base.rxhttp;
 
 public class Response<T> {
     private int    code;
