@@ -14,7 +14,7 @@
             android:id="@+id/btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="输入Dialog" />
+            android:text="rxhttp请求" />
 
     </LinearLayout>
 </ScrollView>
