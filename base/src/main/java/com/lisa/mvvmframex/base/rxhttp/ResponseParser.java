@@ -8,6 +8,7 @@ import rxhttp.wrapper.annotation.Parser;
 import rxhttp.wrapper.entity.ParameterizedTypeImpl;
 import rxhttp.wrapper.exception.ParseException;
 import rxhttp.wrapper.parse.AbstractParser;
+import rxhttp.wrapper.utils.GsonUtil;
 
 @Parser(name = "Response", wrappers = {List.class, PageList.class})
 public class ResponseParser<T> extends AbstractParser<T> {
@@ -23,10 +24,19 @@ public class ResponseParser<T> extends AbstractParser<T> {
 
     @Override
     public T onParse(okhttp3.Response response) throws IOException {
-        final Type type = ParameterizedTypeImpl.get(Response.class, mType); //获取泛型类型
-        Response<T> data = convert(response, type);
-        T t = data.getData(); //获取data字段
-        if (data.getCode() != 0) {//code不等于0，代表数据不正确，抛出异常
+        //第一步，解析code、msg字段，把data当成String对象
+        final Type type = ParameterizedTypeImpl.get(Response.class, String.class);
+        Response<String> data = convert(response, type);
+        T t = null;
+        if (data.getCode() == 0) {  //0代表正常情况
+            //第二步，取出data字段，转换成我们想要的对象
+            t = GsonUtil.getObject(data.getData(), mType);
+        }
+        if (t == null && mType == String.class) {
+            //判断我们传入的泛型是String对象，就给t赋值""字符串，确保t不为null
+            t = (T) "";
+        }
+        if (data.getCode() != 0 || t == null) {
             throw new ParseException(String.valueOf(data.getCode()), data.getErr(), response);
         }
         return t;
