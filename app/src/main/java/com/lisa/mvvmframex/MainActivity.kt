@@ -3,6 +3,7 @@ package com.lisa.mvvmframex
 import android.util.Log
 import android.view.View
 import com.google.gson.Gson
+import com.lisa.mvvmframex.base.rxhttp.ErrorInfo
 import com.lisa.mvvmframex.base.rxhttp.OnError
 import com.lisa.mvvmframex.base.rxhttp.PageList
 import com.lisa.mvvmframex.base.utils.GsonUtil
@@ -48,11 +49,11 @@ class MainActivity : BaseActivity() {
             .asResponse(HotRuleDto::class.java) //第二步, 通过asXxx系列方法，确定返回数据类型
             .to(RxLife.toMain(this)) //感知生命周期，并在主线程回调
             .subscribe(
-                Consumer<HotRuleDto> { ruleDto:HotRuleDto ->
+                { ruleDto: HotRuleDto ->
                     Log.e("请求成功", GsonUtil.toJson(ruleDto))
                 },
-                OnError { error ->
-                    Log.e("请求失败", error.errorMsg)
+                { error ->
+                    Log.e("请求失败", ErrorInfo(error).errorMsg)
                 }
             )
     }
