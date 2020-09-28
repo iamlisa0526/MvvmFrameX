@@ -148,8 +148,10 @@ abstract class BaseListActivity<T> : BaseActivity() {
                 override fun onError(e: ApiException) {
                     if (isRefresh()) {
                         if (pageNo > 1 || mBasePostQo.page > 1) {//加载
-                            pageNo--
-                            mBasePostQo.page--
+                            if (e.code != 1010) {//data==null时不算真正的失败，所以不需要pageNo--
+                                pageNo--
+                                mBasePostQo.page--
+                            }
                             refresh_layout?.finishLoadMore(false)//加载失败
                         } else {//刷新
                             refresh_layout?.finishRefresh(false)//刷新失败
