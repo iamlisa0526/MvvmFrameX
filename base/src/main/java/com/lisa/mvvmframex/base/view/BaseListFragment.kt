@@ -3,7 +3,7 @@ package com.lisa.mvvmframex.base.view
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lisa.mvvmframex.base.R
-import kotlinx.android.synthetic.main.activity_base_list.*
+import kotlinx.android.synthetic.main.layout_base_list.*
 
 /**
  * @Description:    列表Fragment基类
@@ -17,7 +17,7 @@ abstract class BaseListFragment<T> : BaseFragment() {
     lateinit var mAdapter: RecyclerView.Adapter<*>
 
     override fun getLayout(): Int {
-        return R.layout.activity_base_list
+        return R.layout.layout_base_list
     }
 
     override fun init() {

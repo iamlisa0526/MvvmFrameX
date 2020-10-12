@@ -5,7 +5,7 @@ import com.lisa.mvvmframex.base.rxhttp.ErrorInfo
 import com.lisa.mvvmframex.base.rxhttp.PageList
 import com.rxjava.rxlife.RxLife
 import io.reactivex.rxjava3.core.Observable
-import kotlinx.android.synthetic.main.activity_base_list.*
+import kotlinx.android.synthetic.main.layout_base_list.*
 import rxhttp.RxHttpPlugins
 
 /**
