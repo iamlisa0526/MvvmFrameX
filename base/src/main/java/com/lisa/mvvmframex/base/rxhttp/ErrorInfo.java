@@ -56,7 +56,12 @@ public class ErrorInfo {
             errorMsg = throwable.getMessage();
             if (TextUtils.isEmpty(errorMsg)) errorMsg = errorCode;//errorMsg为空，显示errorCode
         } else {
-            errorMsg = throwable.getMessage();
+            String code = throwable.getLocalizedMessage();
+            if ("401".equals(code)) {
+                errorMsg = "授权已过期，请重新登录";
+            } else {
+                errorMsg = throwable.getMessage();
+            }
         }
         this.errorMsg = errorMsg;
     }

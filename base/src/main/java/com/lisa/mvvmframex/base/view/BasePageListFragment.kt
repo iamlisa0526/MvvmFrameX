@@ -5,6 +5,7 @@ import com.lisa.mvvmframex.base.rxhttp.PageList
 import com.rxjava.rxlife.RxLife
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.android.synthetic.main.activity_base_list.*
+import rxhttp.RxHttpPlugins
 
 /**
  * @Description:    分页加载列表Fragment基类
@@ -49,6 +50,13 @@ abstract class BasePageListFragment<T> : BaseListFragment2<T>() {
                     }
                     loading_layout?.setErrorText(ErrorInfo(error).errorMsg)
                     loading_layout?.showError()
+
+                    if (401 == ErrorInfo(error).errorCode) {
+                        //取消所有请求
+                        RxHttpPlugins.cancelAll()
+                        //跳转登录
+                        go2Login()
+                    }
                 }
             )
 
@@ -86,5 +94,10 @@ abstract class BasePageListFragment<T> : BaseListFragment2<T>() {
 
         showEmptyUI()
     }
+
+    /**
+     * 跳转登录页
+     */
+    protected abstract fun go2Login()
 
 }
