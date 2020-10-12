@@ -13,7 +13,7 @@ import rxhttp.RxHttpPlugins
  * @Author:         lisa
  * @CreateDate:     2020/6/12 10:11
  */
-abstract class BasePageListFragment<T> : BaseListFragment<T>() {
+abstract class BasePageListActivity<T> : BaseListActivity<T>() {
     /**
      * 页码
      */

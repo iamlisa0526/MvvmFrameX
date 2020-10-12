@@ -11,7 +11,8 @@ import rxhttp.RxHttpPlugins
  * @Author:         lisa
  * @CreateDate:     2020/6/12 10:11
  */
-abstract class BaseUnPageListFragment<T> : BaseListFragment<T>() {
+abstract class BaseUnPageListActivity<T> : BaseListActivity<T>() {
+
     override fun configRequest() {
         refresh_layout?.setEnableRefresh(false)
         refresh_layout?.setEnableLoadMore(false)
@@ -42,8 +43,6 @@ abstract class BaseUnPageListFragment<T> : BaseListFragment<T>() {
                     }
                 )
         }
-
-
     }
 
     abstract fun getObservableList(): Observable<List<T>>?
