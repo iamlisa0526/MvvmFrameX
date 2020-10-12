@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.lisa.mvvmframex.base.customview.dialog.LoadingDialog
-import com.zhouyou.http.subsciber.IProgressDialog
 
 /**
  * @Description: Fragment基类
@@ -20,15 +19,11 @@ abstract class BaseFragment : Fragment() {
 
     protected lateinit var mLoadingDialog: LoadingDialog
 
-    //用于EasyHttp中ProgressDialogCallBack的dialog
-    protected lateinit var mIProgressDialog: IProgressDialog
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this.requireContext()
 
         mLoadingDialog = LoadingDialog(mContext)
-        mIProgressDialog = IProgressDialog { mLoadingDialog }
     }
 
     override fun onCreateView(

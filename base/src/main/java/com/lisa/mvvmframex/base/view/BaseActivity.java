@@ -1,6 +1,5 @@
 package com.lisa.mvvmframex.base.view;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -11,7 +10,6 @@ import androidx.lifecycle.Observer;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.lisa.mvvmframex.base.customview.dialog.LoadingDialog;
-import com.zhouyou.http.subsciber.IProgressDialog;
 
 /**
  * @Description: Activity基类
@@ -23,9 +21,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected LoadingDialog mLoadingDialog;
 
-    //用于EasyHttp中ProgressDialogCallBack的dialog
-    protected IProgressDialog mIProgressDialog;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +29,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (getLayout() != 0) setContentView(getLayout());
 
         mLoadingDialog = new LoadingDialog(mContext);
-
-        mIProgressDialog = new IProgressDialog() {
-            @Override
-            public Dialog getDialog() {
-                return mLoadingDialog;
-            }
-        };
 
         init();
     }

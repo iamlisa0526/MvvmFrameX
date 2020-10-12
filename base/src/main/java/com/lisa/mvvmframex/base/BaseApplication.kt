@@ -8,10 +8,6 @@ import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.tamsiree.rxkit.RxTool
-import com.zhouyou.http.EasyHttp
-import com.zhouyou.http.model.HttpHeaders
-import okhttp3.Interceptor
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * @Description: Application基类
@@ -31,39 +27,9 @@ abstract class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         application = this
-        configRxEasyHttp()
 
         //RxTool
         RxTool.init(this)
-    }
-
-    /**
-     * 获取全局URL
-     *
-     * @return
-     */
-    protected abstract fun getMyBaseUrl(): String
-
-    /**
-     * 配置RxEasyHttp
-     *
-     * @param baseUrl 全局URL,url只能是域名或者域名+端口号
-     */
-    private fun configRxEasyHttp() {
-        EasyHttp.init(this) //默认初始化
-
-        //全局设置请求头
-        val headers = HttpHeaders()
-        headers.put(
-            "Accept-Encoding",
-            "identity"
-        ) //解决获取contentLength = urlConn.getContentLength()失败的问题
-        EasyHttp.getInstance()
-            .setBaseUrl(getMyBaseUrl()) //设置全局URL,url只能是域名或者域名+端口号
-            .debug("EasyHttp", true) // 打开该调试开关,最后的true表示是否打印内部异常，一般打开方便调试错误
-            .addCommonHeaders(headers)
-            .addConverterFactory(GsonConverterFactory.create())//如果是body的方式提交object，必须要加GsonConverterFactory.create(),他的本质就是把object转成json给到服务器，所以必须要加Gson Converter
-
     }
 
     /**
