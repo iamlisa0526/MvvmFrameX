@@ -63,14 +63,9 @@ abstract class BasePageListFragment<T> : BaseListFragment<T>() {
                     } else {//刷新
                         refresh_layout?.finishRefresh(false)//刷新失败
                     }
-                    loading_layout?.setErrorText(ErrorInfo(error).errorMsg)
-                    loading_layout?.showError()
-
-                    if (401 == ErrorInfo(error).errorCode) {
-                        //取消所有请求
-                        RxHttpPlugins.cancelAll()
-                        //跳转登录
-                        go2Login()
+                    if (ErrorInfo(error).errorMsg.isNotBlank()) {
+                        loading_layout?.setErrorText(ErrorInfo(error).errorMsg)
+                        loading_layout?.showError()
                     }
                 }
             )
@@ -109,10 +104,5 @@ abstract class BasePageListFragment<T> : BaseListFragment<T>() {
 
         showEmptyUI()
     }
-
-    /**
-     * 跳转登录页
-     */
-    protected abstract fun go2Login()
 
 }

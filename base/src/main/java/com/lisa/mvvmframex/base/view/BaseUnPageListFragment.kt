@@ -30,14 +30,9 @@ abstract class BaseUnPageListFragment<T> : BaseListFragment<T>() {
                         showEmptyUI()
                     },
                     { error ->
-                        loading_layout?.setErrorText(ErrorInfo(error).errorMsg)
-                        loading_layout?.showError()
-
-                        if (401 == ErrorInfo(error).errorCode) {
-                            //取消所有请求
-                            RxHttpPlugins.cancelAll()
-                            //跳转登录
-                            go2Login()
+                        if (ErrorInfo(error).errorMsg.isNotBlank()) {
+                            loading_layout?.setErrorText(ErrorInfo(error).errorMsg)
+                            loading_layout?.showError()
                         }
                     }
                 )
@@ -48,8 +43,4 @@ abstract class BaseUnPageListFragment<T> : BaseListFragment<T>() {
 
     abstract fun getObservableList(): Observable<List<T>>?
 
-    /**
-     * 跳转登录页
-     */
-    protected abstract fun go2Login()
 }
