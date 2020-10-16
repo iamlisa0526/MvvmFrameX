@@ -1,20 +1,18 @@
 package com.lisa.mvvmframex
 
-import androidx.fragment.app.Fragment
-import com.lisa.mvvmframex.base.view.BaseTabActivity
-import java.util.*
+import com.lisa.mvvmframex.base.view.BaseActivity
+import com.lisa.mvvmframex.base.view.BaseWebActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 
 
-class MainActivity : BaseTabActivity() {
-
-    override fun getTitles(): Array<String> {
-        return arrayOf("tab1", "tab2")
+class MainActivity : BaseActivity() {
+    override fun getLayout(): Int {
+        return R.layout.activity_main
     }
 
-    override fun getFragments(fragments: ArrayList<Fragment>): ArrayList<Fragment> {
-        fragments.add(MyFragment())
-        fragments.add(MyFragment())
-        return fragments
+    override fun init() {
+        btn.setOnClickListener { startActivity<BaseWebActivity>("url" to "http://www.maomiwh.com") }
     }
 
 }

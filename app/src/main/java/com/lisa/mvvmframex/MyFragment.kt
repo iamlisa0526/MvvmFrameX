@@ -35,9 +35,4 @@ class MyFragment : BasePageListFragment<AgentInfoDto>() {
             }
         }
     }
-
-    override fun go2Login() {
-
-    }
-
 }

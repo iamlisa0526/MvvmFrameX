@@ -1,10 +1,12 @@
 package com.lisa.mvvmframex.base.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
-import android.os.Build.VERSION_CODES.JELLY_BEAN
 import android.os.Message
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import android.webkit.*
 import android.webkit.WebView.WebViewTransport
 import com.lisa.mvvmframex.base.R
 import kotlinx.android.synthetic.main.activity_base_web.*
+
 
 class BaseWebActivity : BaseActivity() {
     private var mUrl = ""
@@ -130,6 +133,12 @@ class BaseWebActivity : BaseActivity() {
      */
     private var webViewClient: WebViewClient = object : WebViewClient() {
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+            Log.e("url链接--->", url)
+            if (url.startsWith("tel:")) {//拨打电话
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+                return true
+            }
             view.loadUrl(url)
             return true
         }
