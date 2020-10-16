@@ -134,7 +134,7 @@ class BaseWebActivity : BaseActivity() {
     private var webViewClient: WebViewClient = object : WebViewClient() {
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
             Log.e("url链接--->", url)
-            if (url.startsWith("tel:")) {//拨打电话
+            if (url.startsWith("tel:") || url.startsWith("sms:")) {//打电话、发短信
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(intent)
                 return true
