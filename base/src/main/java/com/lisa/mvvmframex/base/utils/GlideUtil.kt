@@ -1,16 +1,15 @@
 package com.lisa.mvvmframex.base.utils
 
 import android.app.Activity
-import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.lisa.mvvmframex.base.R
 import kotlin.math.roundToInt
 
@@ -67,6 +66,7 @@ object GlideUtil {
         @DrawableRes placeholder: Int
     ) {
         requestManager.load(path)
+            .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)//关键代码：加载原始大小，解决反复加载图片变模糊的问题
             .centerCrop()
             .placeholder(if (placeholder == 0) R.drawable.default_image_placeholder else placeholder)
             .into(iv)
@@ -121,6 +121,7 @@ object GlideUtil {
     ) {
         requestManager
             .load(path)
+            .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)//关键代码：加载原始大小，解决反复加载图片变模糊的问题
             .skipMemoryCache(true)
             .listener(object : RequestListener<Drawable> {
                 override fun onLoadFailed(
