@@ -29,7 +29,7 @@ abstract class BasePageListActivity<T> : BaseListActivity<T>() {
      */
     private val mBasePostQo = BasePostQo()
 
-    abstract fun getObservablePageList(): Observable<PageList<T>>
+    abstract fun getObservablePageList(): Observable<PageList<T>>?
 
     override fun configRequest() {
         refresh_layout?.autoRefresh()
@@ -52,8 +52,8 @@ abstract class BasePageListActivity<T> : BaseListActivity<T>() {
 
     override fun request() {
         getObservablePageList()
-            .to(RxLife.toMain(this)) //感知生命周期，并在主线程回调
-            .subscribe(
+            ?.to(RxLife.toMain(this)) //感知生命周期，并在主线程回调
+            ?.subscribe(
                 { pageList: PageList<T> ->
                     updatePageData(pageList)
                 },
