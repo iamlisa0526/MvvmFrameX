@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_base_web.*
 
 class BaseWebActivity : BaseActivity() {
     private var mUrl = ""
+    private var data = ""
 
 
     override fun getLayout(): Int {
@@ -26,7 +27,7 @@ class BaseWebActivity : BaseActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun init() {
-        mUrl = intent.getStringExtra("url")!!
+        mUrl = intent.getStringExtra("url") ?: ""
 
         val mWebSettings = webView.settings
         mWebSettings.setSupportZoom(true)
@@ -39,9 +40,7 @@ class BaseWebActivity : BaseActivity() {
             mWebSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
         }
         //修复bug：3D全景介绍无声音
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN) {
-            mWebSettings.mediaPlaybackRequiresUserGesture = false
-        }
+        mWebSettings.mediaPlaybackRequiresUserGesture = false
 
         //调用JS方法.安卓版本大于17,加上注解 @JavascriptInterface
         mWebSettings.javaScriptEnabled = true
@@ -52,7 +51,16 @@ class BaseWebActivity : BaseActivity() {
 
         webView.webChromeClient = webChromeClient
         webView.webViewClient = webViewClient
-        webView.loadUrl(mUrl)
+
+        if (mUrl.isNotBlank()) {
+            webView.loadUrl(mUrl)
+        } else {
+            data = intent.getStringExtra("data")!!
+            webView.settings.defaultTextEncodingName = "utf-8"
+            webView.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
+            webView.loadDataWithBaseURL(null, data, "text/html", "utf-8", null)
+        }
+
     }
 
     /**
