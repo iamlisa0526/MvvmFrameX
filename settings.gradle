@@ -1,3 +1,4 @@
 rootProject.name='MvvmFrameX'
 include ':app'
 include ':base'
+include ':customview'
