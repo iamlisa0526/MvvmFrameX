@@ -18,7 +18,7 @@ import java.util.TimerTask;
 /**
  * 自定义ViewGroup中必须要实现的方法有：测量-布局
  *
- * @Description: 轮播图BannerLayout
+ * @Description: Banner中图片的Layout
  * @Author: lisa
  * @CreateDate: 2020/12/3 16:55
  */
