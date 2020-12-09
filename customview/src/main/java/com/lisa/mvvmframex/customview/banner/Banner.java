@@ -18,7 +18,7 @@ import com.lisa.mvvmframex.customview.R;
  * @Author: lisa
  * @CreateDate: 2020/12/4 16:11
  */
-public class BannerLayout extends FrameLayout implements BannerImageLayout.DotSwitchListener, BannerImageLayout.BannerClickListener {
+public class Banner extends FrameLayout implements BannerImageLayout.DotSwitchListener, BannerImageLayout.BannerClickListener {
     private BannerImageLayout bannerImageLayout;
     private LinearLayout linearLayout;
     private BannerListener bannerListener;
@@ -31,19 +31,19 @@ public class BannerLayout extends FrameLayout implements BannerImageLayout.DotSw
         void clickBanner(int index);
     }
 
-    public BannerLayout(@NonNull Context context) {
+    public Banner(@NonNull Context context) {
         this(context, null);
     }
 
-    public BannerLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public Banner(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BannerLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public Banner(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public BannerLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public Banner(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }

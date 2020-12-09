@@ -22,7 +22,7 @@ import java.util.TimerTask;
  * @Author: lisa
  * @CreateDate: 2020/12/3 16:55
  */
-public class BannerImageLayout extends ViewGroup {
+class BannerImageLayout extends ViewGroup {
     //子View个数
     private int childCount;
     private int childWidth, childHeight;

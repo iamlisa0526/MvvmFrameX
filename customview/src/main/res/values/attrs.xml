@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <!--描边宽度-->
+        <attr name="borderWidth" format="dimension" />
+        <!--描边颜色-->
+        <attr name="borderColor" format="color" />
+        <!--半径-->
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
+</resources>
