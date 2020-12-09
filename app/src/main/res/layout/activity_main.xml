@@ -18,14 +18,14 @@
         android:layout_height="match_parent">
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="102dp"
             android:layout_height="match_parent"
             android:background="@color/primary" />
 
         <com.lisa.mvvmframex.customview.CircleImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/banner1"
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:borderWidth="1dp"
             app:radius="50dp" />
 

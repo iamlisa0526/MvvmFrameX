@@ -45,11 +45,6 @@ public class CircleImageView extends AppCompatImageView {
      */
     private Bitmap bitmap;
 
-    /**
-     * 圆的中心
-     */
-    private float circleCenter;
-
     public CircleImageView(Context context) {
         this(context, null);
     }
@@ -94,7 +89,7 @@ public class CircleImageView extends AppCompatImageView {
         loadBitmap();
         if (bitmap != null) {
             //圆的中心
-            circleCenter = radius + borderWidth;
+            float circleCenter = radius + borderWidth;
 
             //按照新的尺寸缩放原来的bitmap
             bitmap = Bitmap.createScaledBitmap(bitmap, (int) radius * 2, (int) radius * 2, false);

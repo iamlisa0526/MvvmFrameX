@@ -1,6 +1,7 @@
 package com.lisa.mvvmframex
 
 import android.widget.Toast
+import com.lisa.mvvmframex.base.utils.GlideUtil
 import com.lisa.mvvmframex.base.view.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
@@ -16,6 +17,10 @@ class MainActivity : BaseActivity() {
     override fun init() {
         banner.addData(ids)
         banner.setBannerListener { index -> toast("$index") }
+
+        //加载网络图片
+        GlideUtil.setActivityImage(this@MainActivity,"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2107642534,1339643071&fm=26&gp=0.jpg",iv,0)
+
     }
 
 }
