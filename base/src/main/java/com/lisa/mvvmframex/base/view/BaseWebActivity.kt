@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.activity_base_web.*
 
 class BaseWebActivity : BaseActivity() {
     private var mUrl = ""
-    private var data = ""
-
 
     override fun getLayout(): Int {
         return R.layout.activity_base_web
@@ -52,15 +50,7 @@ class BaseWebActivity : BaseActivity() {
         webView.webChromeClient = webChromeClient
         webView.webViewClient = webViewClient
 
-        if (mUrl.isNotBlank()) {
-            webView.loadUrl(mUrl)
-        } else {
-            data = intent.getStringExtra("data")!!
-            webView.settings.defaultTextEncodingName = "utf-8"
-            webView.settings.layoutAlgorithm = WebSettings.LayoutAlgorithm.SINGLE_COLUMN
-            webView.loadDataWithBaseURL(null, data, "text/html", "utf-8", null)
-        }
-
+        webView.loadUrl(mUrl)
     }
 
     /**

@@ -1,30 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@color/primary">
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="16dp">
-
-        <ImageView
-            android:id="@+id/iv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            tools:text="右标题" />
-
-    </FrameLayout>
+    android:background="@color/primary"
+    android:gravity="center_vertical">
 
     <ImageView
         android:id="@+id/iv_back"
@@ -36,12 +16,37 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
         android:drawablePadding="5dp"
+        android:gravity="center"
+        android:singleLine="true"
         android:textColor="@color/white"
         android:textSize="18sp"
-        tools:text="标题" />
-</RelativeLayout>
+        tools:text="好长的题目啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            tools:src="@drawable/error" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/white"
+            tools:text="右标题" />
+
+    </FrameLayout>
+</LinearLayout>
 
