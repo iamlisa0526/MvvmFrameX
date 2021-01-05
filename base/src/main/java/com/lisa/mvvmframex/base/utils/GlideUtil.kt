@@ -1,6 +1,7 @@
 package com.lisa.mvvmframex.base.utils
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -19,6 +20,25 @@ import kotlin.math.roundToInt
  * @CreateDate: 2020/5/29 10:37
  */
 object GlideUtil {
+
+    /**
+     * 设置图片
+     *
+     * @param context
+     * @param path Any类型可以适配Uri
+     * @param iv
+     * @param placeholder
+     */
+    @JvmStatic
+    fun setContextImage(
+        context: Context,
+        path: Any?,
+        iv: ImageView,
+        @DrawableRes placeholder: Int
+    ) {
+        loadSpecifyHWImage(Glide.with(context), path, iv, placeholder)
+    }
+
     /**
      * 设置Fragment图片
      *

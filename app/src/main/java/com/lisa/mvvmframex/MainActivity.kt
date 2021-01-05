@@ -19,7 +19,8 @@ class MainActivity : BaseActivity() {
         banner.setBannerListener { index -> toast("$index") }
 
         //加载网络图片
-        GlideUtil.setActivityImage(this@MainActivity,"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2107642534,1339643071&fm=26&gp=0.jpg",iv,0)
+        GlideUtil.setContextImage(this,"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2107642534,1339643071&fm=26&gp=0.jpg",iv,0)
+
 
     }
 

@@ -49,6 +49,7 @@
             android:textSize="16sp" />
 
         <View
+            android:id="@+id/divider"
             android:layout_width="@dimen/divider_line"
             android:layout_height="match_parent"
             android:background="@color/gray_line" />

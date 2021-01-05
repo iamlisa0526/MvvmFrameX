@@ -141,7 +141,14 @@ class SureCancelDialog : BaseDialog {
      * 确认文本
      */
     fun sureText(@StringRes sureTextStringRes: Int): SureCancelDialog {
-        tv_sure.text = context.getString(sureTextStringRes)
+        if (sureTextStringRes != 0) {
+            tv_sure.text = context.getString(sureTextStringRes)
+            tv_sure.visibility = View.VISIBLE
+            if (divider.visibility == View.GONE) divider.visibility = View.VISIBLE
+        } else {
+            tv_sure.visibility = View.GONE
+            if (divider.visibility == View.VISIBLE) divider.visibility = View.GONE
+        }
         return this
     }
 
@@ -149,7 +156,14 @@ class SureCancelDialog : BaseDialog {
      * 确认文本
      */
     fun sureText(sureText: String): SureCancelDialog {
-        tv_sure.text = sureText
+        if (!TextUtils.isEmpty(sureText)) {
+            tv_sure.text = sureText
+            tv_sure.visibility = View.VISIBLE
+            if (divider.visibility == View.GONE) divider.visibility = View.VISIBLE
+        } else {
+            tv_sure.visibility = View.GONE
+            if (divider.visibility == View.VISIBLE) divider.visibility = View.GONE
+        }
         return this
     }
 
@@ -157,7 +171,14 @@ class SureCancelDialog : BaseDialog {
      * 取消文本
      */
     fun cancelText(@StringRes cancelTextStringRes: Int): SureCancelDialog {
-        tv_cancel.text = context.getString(cancelTextStringRes)
+        if (cancelTextStringRes != 0) {
+            tv_cancel.text = context.getString(cancelTextStringRes)
+            tv_cancel.visibility = View.VISIBLE
+            if (divider.visibility == View.GONE) divider.visibility = View.VISIBLE
+        } else {
+            tv_cancel.visibility = View.GONE
+            if (divider.visibility == View.VISIBLE) divider.visibility = View.GONE
+        }
         return this
     }
 
@@ -165,7 +186,14 @@ class SureCancelDialog : BaseDialog {
      * 取消文本
      */
     fun cancelText(cancelText: String): SureCancelDialog {
-        tv_cancel.text = cancelText
+        if (!TextUtils.isEmpty(cancelText)) {
+            tv_cancel.text = cancelText
+            tv_cancel.visibility = View.VISIBLE
+            if (divider.visibility == View.GONE) divider.visibility = View.VISIBLE
+        } else {
+            tv_cancel.visibility = View.GONE
+            if (divider.visibility == View.VISIBLE) divider.visibility = View.GONE
+        }
         return this
     }
 
