@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@color/primary"
+    android:background="@color/white"
     android:gravity="center_vertical">
 
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:src="@mipmap/header_back" />
+        android:src="@mipmap/back_black" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -23,7 +23,7 @@
         android:drawablePadding="5dp"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="@color/white"
+        android:textColor="@color/black_1f1f1f"
         android:textSize="18sp"
         tools:text="好长的题目啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" />
 
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/white"
+            android:textColor="@color/black_1f1f1f"
             tools:text="右标题" />
 
     </FrameLayout>
