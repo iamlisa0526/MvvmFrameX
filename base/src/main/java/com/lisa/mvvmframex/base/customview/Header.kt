@@ -10,9 +10,10 @@ import com.lisa.mvvmframex.base.R
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
- * Created by admin on 2018/9/12.
+ * @Description: 统一Header
+ * @Author: lisa
+ * @CreateDate: 2020/5/6 15:54
  */
-
 class Header @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
