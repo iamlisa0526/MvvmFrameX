@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.lisa.mvvmframex.base.customview.dialog.LoadingDialog;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 /**
  * @Description: Activity基类
@@ -23,8 +24,16 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         mContext = this;
+
+        //设置状态栏黑色字体与图标,背景默认透明
+        QMUIStatusBarHelper.setStatusBarLightMode(this);
+
+        //设置状态栏白色字体与图标
+//        QMUIStatusBarHelper.setStatusBarDarkMode(this);
 
         if (getLayout() != 0) setContentView(getLayout());
 

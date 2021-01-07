@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.lisa.mvvmframex.base.customview.dialog.LoadingDialog
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper
 
 /**
  * @Description: Fragment基类
@@ -22,6 +23,12 @@ abstract class BaseFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this.requireContext()
+
+        //设置状态栏黑色字体与图标,背景默认透明
+        QMUIStatusBarHelper.setStatusBarLightMode(activity)
+
+        //设置状态栏白色字体与图标
+//        QMUIStatusBarHelper.setStatusBarDarkMode(activity)
 
         mLoadingDialog = LoadingDialog(mContext)
     }

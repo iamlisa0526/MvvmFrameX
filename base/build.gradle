@@ -18,7 +18,7 @@ uploadArchives {
         // 项目名称
         pom.artifactId = "base"
         // 版本号
-        pom.version = "2.9.3"
+        pom.version = "2.9.5"
     }
 }
 
@@ -134,6 +134,9 @@ dependencies {
 
     //图片选择器
     api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
+
+    //腾讯UI库
+    api 'com.qmuiteam:qmui:2.0.0-alpha10'
 
 //--------------------------------以上为构建一个新应用的所必须的三方库----------------------------------------
 //--------------------------------以下为可选三方库，在需要的module中集成即可----------------------------------------
