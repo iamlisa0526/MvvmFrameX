@@ -15,8 +15,7 @@
 
     <com.lisa.mvvmframex.base.customview.ClearEditText
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@null" />
+        android:layout_height="48dp" />
 
     <com.lisa.mvvmframex.customview.banner.Banner
         android:id="@+id/banner"
