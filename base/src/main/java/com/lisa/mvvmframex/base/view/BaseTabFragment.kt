@@ -22,7 +22,6 @@ abstract class BaseTabFragment : BaseFragment() {
 
     override fun init() {
         fragments.clear()
-
         tabAdapter = BaseTabAdapter(childFragmentManager, getTitles(), getFragments(fragments))
         vp_fragment.adapter = tabAdapter
         tab_layout.setViewPager(vp_fragment)
