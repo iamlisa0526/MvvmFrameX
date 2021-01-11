@@ -24,12 +24,6 @@ abstract class BaseFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mContext = this.requireContext()
 
-        //设置状态栏黑色字体与图标,背景默认透明
-        QMUIStatusBarHelper.setStatusBarLightMode(activity)
-
-        //设置状态栏白色字体与图标
-//        QMUIStatusBarHelper.setStatusBarDarkMode(activity)
-
         mLoadingDialog = LoadingDialog(mContext)
     }
 

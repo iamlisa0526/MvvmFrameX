@@ -69,8 +69,6 @@ public class ClearEditText extends AppCompatEditText {
      * 初始化组件
      */
     private void initView() {
-        //设置取消下划线背景
-        setBackground(null);
         //获取EditText的DrawableRight,假如没有设置我们就使用默认的图片
         Drawable[] d = this.getCompoundDrawables();
         drawableLeft = this.getCompoundDrawables()[0];//获取drawableLeft 图片资源对象
