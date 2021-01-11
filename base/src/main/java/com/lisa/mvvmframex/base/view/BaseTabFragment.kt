@@ -13,8 +13,7 @@ import java.util.*
  */
 abstract class BaseTabFragment : BaseFragment() {
 
-    lateinit var tabAdapter: BaseTabAdapter
-    var fragments = ArrayList<Fragment>()
+    private var fragments = ArrayList<Fragment>()
 
     override fun getLayout(): Int {
         return R.layout.layout_base_tab
@@ -22,8 +21,8 @@ abstract class BaseTabFragment : BaseFragment() {
 
     override fun init() {
         fragments.clear()
-        tabAdapter = BaseTabAdapter(childFragmentManager, getTitles(), getFragments(fragments))
-        vp_fragment.adapter = tabAdapter
+        vp_fragment.adapter =
+            BaseTabAdapter(childFragmentManager, getTitles(), getFragments(fragments))
         tab_layout.setViewPager(vp_fragment)
     }
 
