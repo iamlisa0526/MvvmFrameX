@@ -3,6 +3,7 @@ package com.lisa.mvvmframex.base.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Typeface.NORMAL
 import android.net.Uri
 import android.os.Build
 import android.os.Message
@@ -17,7 +18,15 @@ import kotlinx.android.synthetic.main.activity_base_web.*
 
 
 class BaseWebActivity : BaseActivity() {
+    /**
+     * 链接地址
+     */
     private var mUrl = ""
+
+    /**
+     * 字体放大or缩小倍数（默认不传300即放大3倍，否则就设置传过来的倍数）
+     */
+    private var mTextZoom = 300
 
     override fun getLayout(): Int {
         return R.layout.activity_base_web
@@ -25,7 +34,8 @@ class BaseWebActivity : BaseActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun init() {
-        mUrl = intent.getStringExtra("url") ?: ""
+        mUrl = intent?.getStringExtra("url") ?: ""
+        mTextZoom = intent?.getIntExtra("textZoom", 300) ?: 300
 
         val mWebSettings = webView.settings
         mWebSettings.setSupportZoom(true)
@@ -33,6 +43,10 @@ class BaseWebActivity : BaseActivity() {
         mWebSettings.useWideViewPort = true
         mWebSettings.defaultTextEncodingName = "utf-8"
         mWebSettings.loadsImagesAutomatically = true
+
+        //设置字体大小
+        mWebSettings.textZoom = mTextZoom
+
         //修复bug：Mixed Content: The page at 'https://xxx' was loaded over HTTPS, but requested an insecure image 'http://xxx.png'. This request has been blocked; the content must be served over HTTPS."
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mWebSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
