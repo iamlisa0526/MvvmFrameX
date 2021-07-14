@@ -22,8 +22,6 @@ class MainActivity : BaseActivity() {
             )
         }
 
-//        scroll_text.setMovementMethodDefault()
-
         scroll_text.movementMethod = LinkMovementMethod.getInstance()
 
     }
