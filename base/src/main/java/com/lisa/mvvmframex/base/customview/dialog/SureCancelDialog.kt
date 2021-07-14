@@ -207,4 +207,12 @@ class SureCancelDialog : BaseDialog {
         return this
     }
 
+    /**
+     * 设置tv_content高度
+     */
+    fun contentHeight(height: Int): SureCancelDialog {
+        tv_content.height = 100
+        return this
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.lisa.mvvmframex
 
-import android.text.Html
+import android.text.method.LinkMovementMethod
 import com.lisa.mvvmframex.base.view.BaseActivity
 import com.lisa.mvvmframex.base.view.BaseWebActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,6 +22,9 @@ class MainActivity : BaseActivity() {
             )
         }
 
+//        scroll_text.setMovementMethodDefault()
+
+        scroll_text.movementMethod = LinkMovementMethod.getInstance()
 
     }
 

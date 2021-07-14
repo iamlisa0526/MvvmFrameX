@@ -18,4 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="跳转网页" />
+
+    <TextView
+        android:id="@+id/scroll_text"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:text="这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长这是一段很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长" />
 </LinearLayout>
