@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.lisa.mvvmframex.base.customview.dialog.LoadingDialog;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.tamsiree.rxkit.RxActivityTool;
 
 /**
  * @Description: Activity基类
@@ -40,6 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         mLoadingDialog = new LoadingDialog(mContext);
 
         init();
+
+        RxActivityTool.addActivity(this);
     }
 
     /**
@@ -72,5 +75,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         if (mLoadingDialog.isShowing()) mLoadingDialog.dismiss();
         super.onDestroy();
+        RxActivityTool.removeActivity(this);
     }
 }
